@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-const SECRET =  process.env.LOGGIN_SECRET
+const SECRET =  process.env.LOGIN_SECRET
 const EXPIRATION = '1h'
 
 const generateJWT = (payload) => {

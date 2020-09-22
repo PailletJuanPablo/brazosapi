@@ -5,12 +5,12 @@ const getOrganization = async () => {
   let statusCode
   try {
     
-    const resultado = await db.Organization.findOne({
+    const result = await db.Organization.findOne({
       where: {
         id: 1
       }
     })
-    organizations = parsearOrganizacionPublica(resultado)
+    organizations = parsePublicOrganization(result)
     statusCode = 200
   } catch (error) {
     organizations = {message: error.message || 'Internal Server Error'}
@@ -19,12 +19,12 @@ const getOrganization = async () => {
   return {organizations, statusCode}
 }
 
-function parsearOrganizacionPublica(organizacion) {
+function parsePublicOrganization(organization) {
   return {
-    name: organizacion.name,
-    image: organizacion.image,
-    phone: organizacion.phone,
-    address: organizacion.address
+    name: organization.name,
+    image: organization.image,
+    phone: organization.phone,
+    address: organization.address
   }
 }
 
