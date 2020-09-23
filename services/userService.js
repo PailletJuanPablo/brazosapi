@@ -1,25 +1,19 @@
 const db = require('../models');
-//const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-
+const userCreateValidation = require('../joivalidation/createUser');
+const errors = require('../errors/errors');
 
 const crateUser = async (datos) => {
     let result, statusCode
    
-    try {     
-        
+    try {
+        await userCreateValidation(datos);
         const {firstName, lastName ,email, password} = datos;
 
         //Revisar que el usuario se unico
         const getUser = await db.User.findOne({
             where: {email: email}
         });
-        if(!firstName || !lastName || !email || !password){
-            throw {
-                statusCode: 400,
-                msg: 'Hay un error de validacion de campos'
-            }
-        }
 
         if(getUser == null){
             let hash = await bcrypt.hash(`${password}`,10);
@@ -37,14 +31,11 @@ const crateUser = async (datos) => {
             }
            statusCode = 200;
         }else{
-            throw {
-                statusCode: 404,
-                msg: 'Ya existe usuario con el mismo EMAIL'
-            }
+            throw new errors.EmailExistente("Ya existe usuario con el mismo EMAIL");
         }
     } catch (error) {
-        result = { msg : error.msg || 'No funciono el alta'}
-        statusCode = error.statusCode || 400;
+        result = { msg : error.message}
+        statusCode = error.statusCode;
     }
     return{
         result,
