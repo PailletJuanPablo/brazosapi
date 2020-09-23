@@ -1,0 +1,1 @@
+## Recuerden setear el .env como dice en el ejemplo. El LOGIN_SECRET puede ser cualquier string, que es lo que encodea y decodea los JWT. 
