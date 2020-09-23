@@ -1,6 +1,5 @@
 const createError = require('http-errors');
 const express = require('express');
-const {sequelize, conectarDB } = require('./config/db');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -43,10 +42,5 @@ app.use(function(err, req, res, next) {
 });
 
 const port = process.env.PORT || 4000;
-
-app.listen(port, ()=>{
-  console.log(`El servidor funciona en el puerto ${port}`);
-  conectarDB(); 
-});
 
 module.exports = app;

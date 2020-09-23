@@ -1,8 +1,16 @@
 const db = require('../models/index');
+const userService = require('../services/userService')
 const { validationResult } = require('express-validator');
 const bcryptjs = require('bcryptjs');
 
+module.exports = {
+    createUserController: async (req,res) =>{
 
+        const newUser = await userService.crateUser(req.body);
+        res.status(newUser.statusCode).json(newUser.result);
+    }
+}
+/*
 //Crear nuevo usuario
 exports.crateUser = async (req, res) => {
     //revisar si hay errores
@@ -20,10 +28,9 @@ exports.crateUser = async (req, res) => {
         const getUser = await db.User.findOne({
             where: {email: email}
         });
-        console.log(getUser);
+        //console.log(getUser);
        
         if(getUser == null){
-
 
             let hash = await bcryptjs.hash(`${password}`,10);
             //console.log(hash);
@@ -35,7 +42,7 @@ exports.crateUser = async (req, res) => {
                 password: hash
             });
 
-               res.status(200).json(newUser);
+            res.status(200).json(newUser);
             
         }else{
             res.status(404).json({ msg: 'Ya existe usuario con el mismo EMAIL'});
@@ -46,3 +53,4 @@ exports.crateUser = async (req, res) => {
         res.status(400).json(error);
     }
 }
+¨*/

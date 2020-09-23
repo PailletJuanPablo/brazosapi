@@ -16,7 +16,7 @@ router.post('/',
   check('email', 'Agrega un Email valido').isEmail(),
   check('password', 'El password deve contener 6 caracteres como minimo').isLength({min:6})
 ],
- userController.crateUser
+ userController.createUserController
  )
 
 module.exports = router;
