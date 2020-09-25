@@ -1,4 +1,4 @@
-class DatosIncompletos extends Error {
+class IncompleteData extends Error {
     constructor(message) {
       super()
       Error.captureStackTrace(this, this.constructor)
@@ -7,7 +7,7 @@ class DatosIncompletos extends Error {
     }
   }
 
-  class EmailExistente extends Error {
+  class ExistingEmail extends Error {
     constructor(message) {
       super()
       Error.captureStackTrace(this, this.constructor)
@@ -17,5 +17,5 @@ class DatosIncompletos extends Error {
   }
 
 module.exports = {
-    DatosIncompletos, EmailExistente
+  IncompleteData, ExistingEmail
 }

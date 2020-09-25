@@ -31,7 +31,7 @@ const crateUser = async (datos) => {
             }
            statusCode = 200;
         }else{
-            throw new errors.EmailExistente("Ya existe usuario con el mismo EMAIL");
+            throw new errors.ExistingEmail("Ya existe usuario con el mismo EMAIL");
         }
     } catch (error) {
         result = { msg : error.message}

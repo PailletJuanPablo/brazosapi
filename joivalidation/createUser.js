@@ -8,7 +8,7 @@ module.exports = async (datos) =>{
         console.log(value);
     } catch (error) {
        // console.log(error.message);
-        throw new errors.DatosIncompletos('Faltan datos');
+        throw new errors.IncompleteData('Faltan datos');
     }
 }
 
