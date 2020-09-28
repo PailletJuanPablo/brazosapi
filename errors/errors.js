@@ -46,7 +46,7 @@ class RequirePermission extends Error {
     this.message = message || 'No tienes los permisos para acceder al recurso'
   }
 }
-class InternalServerError extends Error{
+class InternalServerError extends Error {
   constructor(message) {
     super()
     Error.captureStackTrace(this, this.constructor)
@@ -55,4 +55,25 @@ class InternalServerError extends Error{
   }
 }
 
-module.exports = {BadRequest, AlreadyExists, NotFound, InternalServerError, RequireLogin, RequirePermission, InvalidCredentials}
+class IncompleteData extends Error {
+  constructor(message) {
+    super()
+    Error.captureStackTrace(this, this.constructor)
+    this.statusCode = 400
+    this.message = message || 'Faltan datos'
+  }
+}
+
+class ExistingEmail extends Error {
+  constructor(message) {
+    super()
+    Error.captureStackTrace(this, this.constructor)
+    this.statusCode = 404
+    this.message = message || 'Ya existe email'
+  }
+}
+
+
+module.exports = { BadRequest, AlreadyExists, NotFound, InternalServerError, RequireLogin, RequirePermission, InvalidCredentials, IncompleteData, ExistingEmail }
+
+

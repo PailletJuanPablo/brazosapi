@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const News = sequelize.define('News', {
+  const Entry = sequelize.define('Entry', {
     title: DataTypes.STRING,
     content: DataTypes.STRING(15000),
     image: DataTypes.STRING,
@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     deletedAt: DataTypes.DATE
   }, {
     sequelize,
-    modelName: 'News',
+    modelName: 'Entry',
     paranoid: true
   });
-  News.associate = function(models) {
+  Entry.associate = function(models) {
     // associations can be defined here
   };
-  return News;
+  return Entries;
 };
