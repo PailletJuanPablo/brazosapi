@@ -12,7 +12,7 @@ async function requireLogin(req, res, next) {
     const payload = jwt(token.split(' ')[1])
     const user = {
       userId: payload.userId,
-      accountType: payload.accountType
+      accountType: payload.roleId
     }
     req.user = user
     next()
