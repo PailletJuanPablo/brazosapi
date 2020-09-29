@@ -5,17 +5,20 @@ const storage = multer.memoryStorage()
   const upload = multer({
     storage: storage,
     limits: {
-      fields:1,
+      fields: 4,
       fileSize: 60000000,
       files: 1,
-      parts: 2
+      parts: 5
     }
   })
 const uploadNews = (req, res) => {
   upload.single('media')(req, res, async (err) => { 
     //ToDo:
-    //1. Buscar manera de mandar o sacar la informacion del request
-    const news = JSON.parse(req.body.news)
+    const news = {
+      title: req.body.title,
+      content: req.body.content,
+      category: req.body.category
+    }
     //2. Descomentar y comentar cuando agreguen el middleware requireLogin a la ruta(antes que este asi le mete el req.user)
     userId = 1
     // const userId = req.user.userId
