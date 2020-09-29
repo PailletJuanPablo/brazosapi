@@ -1,6 +1,6 @@
 const db = require('../models');
 const { contactSchema } = require('../joivalidation/contacts');
-const contactService = async (req, res) => {
+const createContact = async (req, res) => {
 //console.log(contactSchema);
 
 	try {
@@ -14,4 +14,4 @@ const contactService = async (req, res) => {
 	}
 };
 
-module.exports = { contactService };
+module.exports = { createContact };

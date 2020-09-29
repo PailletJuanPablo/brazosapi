@@ -1,7 +1,7 @@
-const { contactService } = require("../services/contactService");
+const { createContact } = require("../services/contactService");
 const storeContact = async (req, res) => {
   try {
-    const resultado = await contactService(req, res);
+    const resultado = await createContact(req, res);
     res.send('ok')
   } catch (error) {
     res.send(error.message);
