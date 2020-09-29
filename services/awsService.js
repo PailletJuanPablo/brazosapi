@@ -22,4 +22,4 @@ const uploadFile = async (userId, fileName, fileStream) => {
   } 
 }
 
-module.exports = uploadFile
+module.exports = {uploadFile}
