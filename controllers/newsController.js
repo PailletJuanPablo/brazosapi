@@ -1,5 +1,7 @@
 const multer = require('multer')
 const {createNewNews} = require('../services/newsService')
+const db = require('../models/index');
+const newsServices = require('../services/newsServices')
 
 const storage = multer.memoryStorage()
   const upload = multer({
@@ -11,6 +13,7 @@ const storage = multer.memoryStorage()
       parts: 5
     }
   })
+  
 const uploadNews = (req, res) => {
   upload.single('media')(req, res, async (err) => { 
     //ToDo:
@@ -27,4 +30,12 @@ const uploadNews = (req, res) => {
   })
 }
 
-module.exports = {uploadNews}
+
+
+module.exports = {
+    getNewsForId: async (req,res) =>{
+        const oneNews = await newsServices.findNewsForId(req.params);
+        res.status(oneNews.statusCode).json(oneNews.result);
+    },
+    uploadNews
+}
