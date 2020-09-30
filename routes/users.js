@@ -7,9 +7,9 @@ const userController = require('../controllers/userController');
 
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-	res.send('respond with a resource');
-});
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource')
+// })
 router.post('/session/login', sessionController.sessionController)
 /* GET authenticated user data */
 router.get('/user', getUser);
