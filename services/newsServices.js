@@ -16,7 +16,7 @@ const findNewsForId = async (datos) => {
             result = getOneNews;
            statusCode = 200;
         }else{
-            throw new errors.NotExistNews("Ya existe usuario con el mismo EMAIL");
+            throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
         }
     } catch (error) {
         result = { msg : error.message}

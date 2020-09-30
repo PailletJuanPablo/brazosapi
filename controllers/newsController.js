@@ -4,7 +4,7 @@ const newsServices = require('../services/newsServices')
 
 module.exports = {
     getNewsForId: async (req,res) =>{
-        const oneNews = await newsServices.findNewsForId(req.body);
+        const oneNews = await newsServices.findNewsForId(req.params);
         res.status(oneNews.statusCode).json(oneNews.result);
     }
 }
