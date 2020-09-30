@@ -1,4 +1,4 @@
-const findNews = require('../services/newsService');
+const {findNews} = require('../services/newsService');
 
 const getAllNewsController = async (req, res) => {
   const news = await findNews();
