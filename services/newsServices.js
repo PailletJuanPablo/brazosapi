@@ -1,11 +1,11 @@
 const db = require('../models');
 const errors = require('../errors/errors');
 
-const findNewsForId = async (datos) => {
+const findNewsForId = async (date) => {
     let result, statusCode
    
     try {
-        const {id} = datos;
+        const {id} = date;
 
         //Revisar que el usuario se unico
         const getOneNews = await db.Entry.findOne({
