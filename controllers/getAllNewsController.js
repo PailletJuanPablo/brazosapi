@@ -1,6 +1,6 @@
-const findNews = require('../services/newsService');
 
 const getAllNewsController = async (req, res) => {
+  console.log('here2')
   const news = await findNews();
 
   if (!news) return res.status(500).send({ message: 'Server error' });

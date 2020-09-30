@@ -13,7 +13,7 @@ const storage = multer.memoryStorage()
       parts: 5
     }
   })
-  
+
 const uploadNews = (req, res) => {
   upload.single('media')(req, res, async (err) => { 
     //ToDo:
@@ -30,12 +30,31 @@ const uploadNews = (req, res) => {
   })
 }
 
+const getNewsForId = async (req,res) =>{
+  try {
+    const oneNews = await newsServices.findNewsForId(req.params);
+    return res.status(oneNews.statusCode).json(oneNews.result);
+  } catch (error) {
+    return res.status(500).send({ message: 'Server error' });
+  }
+};
+
+const getAllNews = async (req, res) => {
+  try {
+    const news = await newsServices.findNews();
+    if (!news.length) {
+      return res.status(200).json({ message: 'No news found.' });
+    }
+    return res.json({ message: 'OK', news });
+  } catch (error) {
+    return res.status(500).send({ message: 'Server error' })
+  }
+ 
+};
 
 
 module.exports = {
-    getNewsForId: async (req,res) =>{
-        const oneNews = await newsServices.findNewsForId(req.params);
-        res.status(oneNews.statusCode).json(oneNews.result);
-    },
-    uploadNews
+    getNewsForId,
+    uploadNews,
+    getAllNews
 }
