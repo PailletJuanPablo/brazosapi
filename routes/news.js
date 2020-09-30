@@ -4,7 +4,7 @@ const newsController = require('../controllers/newsController')
 const getAllNewsController = require('../controllers/getAllNewsController');
 
 router.get('/', getAllNewsController);
-router.post('/news/:id', newsController.getNewsForId)
+router.get('/news/:id', newsController.getNewsForId);
 
 
 
