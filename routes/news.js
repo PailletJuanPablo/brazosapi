@@ -4,8 +4,9 @@ const newsController = require('../controllers/newsController')
 const getAllNewsController = require('../controllers/getAllNewsController');
 
 router.get('/', getAllNewsController);
-router.post('/news/:id', newsController.getNewsForId)
 
+router.get('/:id', newsController.getById);
 
+router.post('/:id', newsController.updateById);
 
 module.exports = router;

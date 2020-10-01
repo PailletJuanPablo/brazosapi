@@ -1,7 +1,9 @@
-const {uploadFile} = require('./awsService')
-const db = require('../models')
-const newsJoiValidation = require('../joivalidation/entryNews')
-const {validateImage} = require('../util/validateImage')
+const {uploadFile} = require('./awsService');
+const db = require('../models');
+const newsJoiValidation = require('../joivalidation/entryNews');
+const {validateImage} = require('../util/validateImage');
+const updateNewsValidation = require('../joivalidation/updateNews');
+const errors = require('../errors/errors');
 
 const createNewNews = async (data, fileprops, userId) => {
   let result, statusCode
@@ -49,6 +51,59 @@ const findNews = async () => {
   }
 };
 
+const findById = async (date) => {
+  let result, statusCode
+ 
+  try {
+      //Revisar que exista
+      const getOneNews = await db.Entry.findOne({
+          where: {id: date}
+      });
 
+      if(!getOneNews){
+        throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
+      }
+      
+      result = getOneNews;
+      statusCode = 200;
+  } catch (error) {
+      result = { msg : error.message}
+      statusCode = error.statusCode;
+  }
+  return{
+      result,
+      statusCode
+  }
+}
 
-module.exports = {createNewNews, findNews}
+const updateNews = async (id,date) =>{
+  let result, statusCode
+
+  //console.log(date);
+
+  try {
+    await updateNewsValidation(date);
+    
+    //Revisar que exista
+    const getOneNews = await db.Entry.findOne({
+      where: {id: id}
+    });
+
+    if(!getOneNews){
+      throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
+    }
+    result = await db.Entry.update(date, {
+    where: { id: id}
+    });
+    statusCode = 200;
+  } catch (error) {
+    result = { msg : error.message}
+    statusCode = error.statusCode;
+  }
+  return{
+    result,
+    statusCode
+  }
+}
+
+module.exports = {createNewNews, findNews, findById, updateNews}
