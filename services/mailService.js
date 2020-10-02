@@ -19,6 +19,7 @@ const sendTemplate = async (contentBody) => {
     statusCode
   }
 }
+const email = ''
 const sendHelloWorld = async () => {
   let statusCode, result
   try {
@@ -28,7 +29,7 @@ const sendHelloWorld = async () => {
     })
     // return emailTemplate
     // console.log('Creamos el template')
-    await email.send('santiagolky@gmail.com', 'Probando', 'No se donde aparece esto', emailTemplate)
+    await email.send(email, 'Probando', 'No se donde aparece esto', emailTemplate)
     // return emailTemplate
     statusCode = 201
     result= {message: 'El mail ha sido enviado' }
