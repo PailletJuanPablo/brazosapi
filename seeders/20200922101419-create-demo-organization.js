@@ -10,6 +10,9 @@ module.exports = {
       phone: 123456,
       address: 'Dirección demo',
       welcomeText: 'Bienvenido a organización demo',
+      facebookUrl: 'https://www.facebook.com',
+      instagramUrl: 'https://www.instagram.com',
+      linkedinUrl: 'https://www.linkedin.com',
       createdAt: new Date,
       updatedAt: new Date
     }], {});

@@ -27,6 +27,15 @@ module.exports = {
       welcomeText: {
         type: Sequelize.STRING
       },
+      facebookUrl: {
+        type: Sequelize.STRING
+      },
+      instagramUrl: {
+        type: Sequelize.STRING
+      },
+      linkedinUrl: {
+        type: Sequelize.STRING
+      },
       deletedAt: {
         type: Sequelize.DATE
       },
