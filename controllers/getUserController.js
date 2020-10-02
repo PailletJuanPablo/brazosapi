@@ -3,6 +3,7 @@ const { getUserId } = require('../helpers/getUserId');
 
 const getUser = async (req, res) => {
 	try {
+		console.log(req.headers.authorization)
 		if (!req.headers.authorization) {
 			res.status(400).send('Please provide Token');
 		}

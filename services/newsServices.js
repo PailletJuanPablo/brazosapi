@@ -9,7 +9,7 @@ const findNewsForId = async (date) => {
    
     try {
         const {id} = date;
-
+        console.log(id)
         //Revisar que el usuario se unico
         const getOneNews = await db.Entry.findOne({
             where: {id: id}
@@ -25,6 +25,7 @@ const findNewsForId = async (date) => {
         result = { msg : error.message}
         statusCode = error.statusCode;
     }
+    console.log(result)
     return{
         result,
         statusCode

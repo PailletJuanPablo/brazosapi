@@ -5,7 +5,6 @@ const errors = require('../errors/errors');
 
 const crateUser = async (datos) => {
     let result, statusCode
-   
     try {
         await userCreateValidation(datos);
         const {firstName, lastName ,email, password} = datos;
@@ -34,6 +33,7 @@ const crateUser = async (datos) => {
             throw new errors.ExistingEmail("Ya existe usuario con el mismo EMAIL");
         }
     } catch (error) {
+        console.log(error)
         result = { msg : error.message}
         statusCode = error.statusCode;
     }

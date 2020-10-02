@@ -1,5 +1,5 @@
 const multer = require('multer')
-const {createNewNews} = require('../services/newsService')
+// const {createNewNews} = require('../services/newsService')
 const db = require('../models/index');
 const newsServices = require('../services/newsServices')
 
@@ -25,7 +25,7 @@ const uploadNews = (req, res) => {
     //2. Descomentar y comentar cuando agreguen el middleware requireLogin a la ruta(antes que este asi le mete el req.user)
     userId = 1
     // const userId = req.user.userId
-    const result = await createNewNews(news, req.file, userId)
+    const result = await newsServices.createNewNews(news, req.file, userId)
     res.status(result.statusCode).json(result.result)
   })
 }
@@ -35,6 +35,7 @@ const getNewsForId = async (req,res) =>{
     const oneNews = await newsServices.findNewsForId(req.params);
     return res.status(oneNews.statusCode).json(oneNews.result);
   } catch (error) {
+    console.log(error.message)
     return res.status(500).send({ message: 'Server error' });
   }
 };
