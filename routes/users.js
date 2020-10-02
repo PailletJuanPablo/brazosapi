@@ -3,6 +3,7 @@ var router = express.Router();
 const sessionController = require('../controllers/sessionController')
 const { getUser } = require('../controllers/getUserController');
 const userController = require('../controllers/userController');
+const requireLogin = require('../middlewares/requirelogin');
 
 
 
@@ -15,5 +16,7 @@ router.post('/session/login', sessionController.sessionController)
 router.get('/user', getUser);
 /* POST create user. */
 router.post('/', userController.createUserController)
+/*DELETE user */
+router.delete('/:id',requireLogin,userController.deleteAccount)
 
 module.exports = router;

@@ -43,6 +43,35 @@ const crateUser = async (datos) => {
     }
 }
 
+const softDelete = async (id) =>{
+    let result, statusCode
+    try {
+
+        //buscar usuario por id
+        const user = await db.User.findByPk(id);
+        
+        if(user === null)  throw new errors.NotFound('Usuario no encontrado');
+        const {firstName,lastName,email} = user
+         await db.User.destroy({
+            where:{
+                id
+            }
+        });
+        result = {firstName,lastName,email}
+        statusCode = 200;    
+    } catch (error) {
+        console.log(error);
+        result = { msg : error.message}
+        statusCode = error.statusCode;
+    }
+
+    return{
+        result,
+        statusCode
+    }
+}
+
 module.exports = {
-    crateUser
+    crateUser,
+    softDelete
 }

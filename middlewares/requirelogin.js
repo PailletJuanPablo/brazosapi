@@ -4,7 +4,7 @@ const errors = require('../errors/errors')
 
 //Recordar que el token se compone por 2 partes, el cliente debe agregar "bearer " + jwt
 // bearer djknjfndfn.iduhui34u5hhi.djhbfdb
-async function requireLogin(req, res, next) {
+ function requireLogin(req, res, next) {
   const header = req.headers
   const token = header.authorization
   try {
