@@ -14,13 +14,8 @@ const findById = async (date) => {
     const getOneNews = await db.Entry.findOne({
       where: { id: id }
     });
-
-    if (getNews != null) {
       result = getOneNews;
       statusCode = 200;
-    } else {
-      throw new errors.NotExistNews('NO EXISTE UNA NOTICIA CON ESE ID');
-    }
   } catch (error) {
     result = { msg: error.message };
     statusCode = error.statusCode;

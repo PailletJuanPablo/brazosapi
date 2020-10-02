@@ -31,8 +31,9 @@ const uploadNews = (req, res) => {
 const getById = async (req, res) => {
   try {
     const oneNews = await newsService.findById(req.params);
-    return res.status(oneNews.statusCode).json(oneNews.result);
+    return res.status(200).json(oneNews.result);
   } catch (error) {
+    console.log(error)
     return res.status(500).send({ message: 'Server error' });
   }
 };
