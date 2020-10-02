@@ -3,7 +3,6 @@ const sendgrid = require('@sendgrid/mail')
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY)
 const from = process.env.SENDGRID_USER
 const send = async (to, subject, text, html) => {
-  console.log(from)
   await sendgrid.send({
     to: to,
     from,
