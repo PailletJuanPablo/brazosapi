@@ -51,13 +51,15 @@ const findNews = async () => {
   }
 };
 
+
 const findById = async (date) => {
   let result, statusCode
  
   try {
       //Revisar que exista
+      const {id} = date;
       const getOneNews = await db.Entry.findOne({
-          where: {id: date}
+          where: {id: id}
       });
 
       if(!getOneNews){
@@ -76,34 +78,36 @@ const findById = async (date) => {
   }
 }
 
-const updateNews = async (id,date) =>{
+const updateNews = async (date) =>{
   let result, statusCode
 
-  //console.log(date);
-
   try {
-    await updateNewsValidation(date);
-    
-    //Revisar que exista
+    await updateNewsValidation(date.body);
+
+    const {id} = date.params;
     const getOneNews = await db.Entry.findOne({
       where: {id: id}
     });
+    console.log(25);
 
     if(!getOneNews){
       throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
     }
-    result = await db.Entry.update(date, {
+
+    result = await db.Entry.update(date.body, {
     where: { id: id}
     });
     statusCode = 200;
   } catch (error) {
     result = { msg : error.message}
-    statusCode = error.statusCode;
+    statusCode = error.statusCode || 500;
   }
   return{
     result,
     statusCode
   }
 }
+
+
 
 module.exports = {createNewNews, findNews, findById, updateNews}

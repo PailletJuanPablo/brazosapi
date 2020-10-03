@@ -43,7 +43,7 @@ const getById= async (req,res) =>{
 const updateById= async (req,res) =>{
     //res.json(req.body);
     //res.json(req.params);
-    const update = await newsService.updateNews(req.params,req.body);
+    const update = await newsService.updateNews(req);
     res.status(update.statusCode).json(update.result);
   }
 
