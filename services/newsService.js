@@ -1,30 +1,37 @@
-const db = require('../models');
 const errors = require('../errors/errors');
 const { uploadFile } = require('./awsService');
 const newsJoiValidation = require('../joivalidation/entryNews');
 const { validateImage } = require('../util/validateImage');
+const updateNewsValidation = require('../joivalidation/updateNews');
+const db = require('../models');
+
+
 
 const findById = async (date) => {
-  let result, statusCode;
-
+  let result, statusCode
+ 
   try {
-    const { id } = date;
+      //Revisar que exista
+      const {id} = date;
+      const getOneNews = await db.Entry.findOne({
+          where: {id: id}
+      });
 
-    //Revisar que el usuario se unico
-    const getOneNews = await db.Entry.findOne({
-      where: { id: id }
-    });
+      if(!getOneNews){
+        throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
+      }
+      
       result = getOneNews;
       statusCode = 200;
   } catch (error) {
-    result = { msg: error.message };
-    statusCode = error.statusCode;
+      result = { msg : error.message}
+      statusCode = error.statusCode;
   }
-  return {
-    result,
-    statusCode
-  };
-};
+  return{
+      result,
+      statusCode
+  }
+}
 
 const create = async (data, fileprops, userId) => {
   let result, statusCode;
@@ -76,8 +83,41 @@ const findAll = async () => {
   }
 };
 
-module.exports = {
-  findById,
-  create,
-  findAll
-};
+
+
+const updateNews = async (date) =>{
+  let result, statusCode
+
+  try {
+    await updateNewsValidation(date.body);
+
+    const {id} = date.params;
+    const getOneNews = await db.Entry.findOne({
+      where: {id: id}
+    });
+    console.log(25);
+
+    if(!getOneNews){
+      throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
+    }
+
+    result = await db.Entry.update(date.body, {
+    where: { id: id}
+    });
+    statusCode = 200;
+  } catch (error) {
+    result = { msg : error.message}
+    statusCode = error.statusCode || 500;
+  }
+  return{
+    result,
+    statusCode
+  }
+}
+
+
+
+
+
+
+module.exports = {create, findAll, findById, updateNews}
