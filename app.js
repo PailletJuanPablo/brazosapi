@@ -12,7 +12,7 @@ const organizationRouter = require('./routes/organizations');
 const newsRouter = require('./routes/news');
 const contactsRouter = require('./routes/contacts');
 
-const entriesRouter = require('./routes/entries')
+const entriesRouter = require('./routes/news')
 const emailRouter = require('./routes/email')
 const app = express();
 app.use(cors());
