@@ -3,6 +3,7 @@ const ejs = require('ejs')
 const db = require('../models/')
 // Este metodo es para usarse de manera asincrona
 const OngID = 1
+const ONG_NAME_HARDCODED = 'Brazos Abiertos'
 const sendWelcome = async (user, ong) => {
   try {
     let ongName 
@@ -15,7 +16,7 @@ const sendWelcome = async (user, ong) => {
       if (result) {
         ongName = result.name
       } else {
-        ongName = 'Brazos Abiertos'
+        ongName = ONG_NAME_HARDCODED
       }
     } else {
       ongName = ong
