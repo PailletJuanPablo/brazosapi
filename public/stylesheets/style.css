@@ -6,3 +6,14 @@ body {
 a {
   color: #00B7FF;
 }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.textCenter {
+  text-align: center;
+}

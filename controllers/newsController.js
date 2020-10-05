@@ -10,6 +10,7 @@ const upload = multer({
     parts: 5
   }
 });
+// const {createNewNews} = require('../services/newsService')
 const db = require('../models/index');
 
 
