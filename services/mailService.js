@@ -6,7 +6,7 @@ const OrganizationService = require('./organizationService')
 const OngID = 1
 const ONG_NAME_HARDCODED = 'Brazos Abiertos'
 
-const contactMail = 'santiagolky@gmail.com'
+const contactMail = ''
 
 const sendContact = async (contact) => {
   try {
