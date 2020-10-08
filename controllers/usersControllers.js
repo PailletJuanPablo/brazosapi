@@ -22,7 +22,11 @@ const getOne = async (req, res) => {
 const update = async (req, res) => {
     try {
         const userUpdated = await userService.updates(req.params.id, req.body);
-        res.status(200).json(userUpdated);    
+        if (!userUpdated) {
+            res.status(400).json({error: 'No cumple con los requisitos'})
+        } else {
+            res.status(200).json(userUpdated); 
+        }           
     } catch (error) {
         res.status(500).json({error: 'Server Error'})
     }    

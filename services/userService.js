@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const userCreateValidation = require('../joivalidation/createUser');
 const errors = require('../errors/errors');
 const emailService = require('./mailService')
+const updateUserValidation = require('../joivalidation/updateUser');
 
 const crateUser = async (datos) => {
     let result, statusCode
@@ -59,26 +60,23 @@ const findById = async (id) => {
 
 const updates = async (id, body) => {
     const { firstName, lastName } = body;
+    let userUpdated;
     try {
-        if (!body) {
-            throw new errors.IncompleteData('Faltan datos');
-        } else {
-            let userUpdated = await db.User.update({
-                firstName: firstName,
-                lastName: lastName,
-            },
-                { where: { id: id } }
-            );
-            userUpdated = db.User.findOne({
-                attributes: ['id', 'firstName', 'lastName', 'email'],
-                where: { id: id },
-            });
-            return userUpdated
-        }
+        await updateUserValidation(body);
+        userUpdated = await db.User.update({
+            firstName: firstName,
+            lastName: lastName,
+        },
+            { where: { id: id } }
+        );
+        userUpdated = db.User.findOne({
+            attributes: ['id', 'firstName', 'lastName', 'email'],
+            where: { id: id },
+        });
+        return userUpdated
     } catch (error) {
         console.log(error)
     }
-
 }
 
 module.exports = {

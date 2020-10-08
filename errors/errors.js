@@ -91,6 +91,15 @@ class NotExistUser extends Error {
   }
 }
 
+class ExpectationFailed extends Error {
+  constructor(message) {
+    super()
+    Error.captureStackTrace(this, this.constructor)
+    this.statusCode = 417
+    this.message = message || 'No cumple con los requisitos'
+  }
+}
+
 
 module.exports = {
   BadRequest,
@@ -103,7 +112,8 @@ module.exports = {
   IncompleteData,
   ExistingEmail,
   NotExistNews,
-  NotExistUser
+  NotExistUser,
+  ExpectationFailed
 }
 
 
