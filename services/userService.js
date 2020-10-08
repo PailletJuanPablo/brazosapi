@@ -9,15 +9,15 @@ const crateUser = async (datos) => {
     try {
         console.log(datos)
         await userCreateValidation(datos);
-        const {firstName, lastName ,email, password} = datos;
-        
+        const { firstName, lastName, email, password } = datos;
+
         //Revisar que el usuario se unico
         const getUser = await db.User.findOne({
-            where: {email: email}
+            where: { email: email }
         });
-        
-        if(getUser == null){
-            let hash = await bcrypt.hash(`${password}`,10);
+
+        if (getUser == null) {
+            let hash = await bcrypt.hash(`${password}`, 10);
             const newUser = await db.User.create({
                 firstName: firstName,
                 lastName: lastName,
@@ -31,21 +31,58 @@ const crateUser = async (datos) => {
                 email: newUser.email,
             }
             emailService.sendWelcome(result, 'Brazos Abiertos')
-           statusCode = 200;
-        }else{
+            statusCode = 200;
+        } else {
             throw new errors.ExistingEmail("Ya existe usuario con el mismo EMAIL");
         }
     } catch (error) {
         console.log(error)
-        result = { msg : error.message}
+        result = { msg: error.message }
         statusCode = error.statusCode;
     }
-    return{
+    return {
         result,
         statusCode
     }
 }
 
+const findById = async (id) => {
+    try {
+        return await db.User.findOne({
+            attributes: ['id', 'firstName', 'lastName', 'email'],
+            where: { id: id },
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const updates = async (id, body) => {
+    const { firstName, lastName } = body;
+    try {
+        if (!body) {
+            throw new errors.IncompleteData('Faltan datos');
+        } else {
+            let userUpdated = await db.User.update({
+                firstName: firstName,
+                lastName: lastName,
+            },
+                { where: { id: id } }
+            );
+            userUpdated = db.User.findOne({
+                attributes: ['id', 'firstName', 'lastName', 'email'],
+                where: { id: id },
+            });
+            return userUpdated
+        }
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
 module.exports = {
-    crateUser
+    crateUser,
+    findById,
+    updates
 }

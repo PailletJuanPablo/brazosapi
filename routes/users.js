@@ -12,6 +12,7 @@ router.get('/user', getUser);
 router.post('/', usersControllers.create);
 /* POST session login user. */
 router.post('/session/login', sessionController.sessionController);
-
+/*PUT update user data*/
+router.put('/:id', usersControllers.update);
 
 module.exports = router;
