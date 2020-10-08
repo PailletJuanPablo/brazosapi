@@ -5,7 +5,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('Organizations', [{
       name: 'Ong de prueba',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: 'https://drive.google.com/uc?export=view&id=1SO5FoXAdaeftX701CiKp6DRr7jdgMf3C',
       description: 'Descripción de organización de prueba 1',
       phone: 123456,
       address: 'Dirección demo',
