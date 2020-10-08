@@ -7,11 +7,41 @@ module.exports = {
       title: 'Nueva Novedad',
       content: 'Contenido de novedad',
       image: 'Imagen',
-      contentType: "tipo",
+      contentType: "news",
       category: "",
       createdAt: new Date,
       updatedAt: new Date
-    }], {});
+    },
+    {
+      title: 'Nueva Novedad 1',
+      content: 'Contenido de novedad',
+      image: 'Imagen',
+      contentType: "news",
+      category: "",
+      createdAt: new Date,
+      updatedAt: new Date
+    },
+    {
+      title: 'Nueva Novedad 2',
+      content: 'Contenido de novedad',
+      image: 'Imagen',
+      contentType: "news",
+      category: "",
+      createdAt: new Date,
+      updatedAt: new Date
+    },
+    {
+      title: 'Nueva Novedad 3',
+      content: 'Contenido de novedad',
+      image: 'Imagen',
+      contentType: "news",
+      category: "",
+      createdAt: new Date,
+      updatedAt: new Date
+    }
+  
+  
+  ], {});
 
   },
   down: async (queryInterface, Sequelize) => {

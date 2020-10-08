@@ -24,7 +24,8 @@ function parsePublicOrganization(organization) {
     name: organization.name,
     image: organization.image,
     phone: organization.phone,
-    address: organization.address
+    address: organization.address,
+    welcomeText: organization.welcomeText
   }
 }
 
