@@ -115,9 +115,28 @@ const updateNews = async (date) =>{
   }
 }
 
+const deleteNews = async (id) => {
+  try {
+    let deletedEntry;
+    const entry = await db.Entry.findByPk(id);
+
+    if(!entry) {
+      deletedEntry = null;
+    } else {
+      await db.Entry.destroy({
+        where: {
+          id
+        }
+      });
+      deletedEntry = entry;
+    }
+    
+    return deletedEntry;
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 
-
-
-module.exports = {create, findAll, findById, updateNews}
+module.exports = {create, findAll, findById, updateNews, deleteNews}
