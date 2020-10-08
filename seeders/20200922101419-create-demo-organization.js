@@ -4,12 +4,12 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
 
     await queryInterface.bulkInsert('Organizations', [{
-      name: 'Ong de prueba',
+      name: 'Brazos Abiertos',
       image: 'https://drive.google.com/uc?export=view&id=1SO5FoXAdaeftX701CiKp6DRr7jdgMf3C',
       description: 'Descripción de organización de prueba 1',
       phone: 123456,
       address: 'Dirección demo',
-      welcomeText: 'Bienvenido a organización demo',
+      welcomeText: 'Todos podemos ayudar a alguien',
       facebookUrl: 'https://www.facebook.com',
       instagramUrl: 'https://www.instagram.com',
       linkedinUrl: 'https://www.linkedin.com',
