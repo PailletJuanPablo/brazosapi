@@ -82,7 +82,28 @@ class NotExistNews extends Error {
   }
 }
 
+class NotExistOrganization extends Error {
+  constructor(message) {
+    super()
+    Error.captureStackTrace(this, this.constructor)
+    this.statusCode = 404
+    this.message = message || 'NO EXISTE UNA ORGANIZACIÓN CON ESE ID'
+  }
+}
 
-module.exports = { BadRequest, AlreadyExists, NotFound, InternalServerError, RequireLogin, RequirePermission, InvalidCredentials, IncompleteData, ExistingEmail, NotExistNews }
+
+module.exports = {
+  BadRequest,
+  AlreadyExists,
+  NotFound,
+  InternalServerError,
+  RequireLogin,
+  RequirePermission,
+  InvalidCredentials,
+  IncompleteData,
+  ExistingEmail,
+  NotExistNews,
+  NotExistOrganization
+ }
 
 
