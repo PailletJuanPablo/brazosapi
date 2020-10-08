@@ -18,6 +18,18 @@ const getOrganization = async () => {
   }
   return {organizations, statusCode}
 }
+const get = async () => {
+  try {
+    return await db.Organization.findOne({
+      where: {
+        id: 1
+      }
+    })
+  } catch(error)
+  {
+    throw {message: 'hay algun error'}
+  }
+}
 
 function parsePublicOrganization(organization) {
   return {
@@ -28,4 +40,4 @@ function parsePublicOrganization(organization) {
   }
 }
 
-module.exports = {getOrganization}
+module.exports = {getOrganization, get}
