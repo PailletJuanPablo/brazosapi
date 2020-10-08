@@ -59,10 +59,20 @@ const updateById = async (req, res) => {
   res.status(update.statusCode).json(update.result);
 }
 
+const edit = async (req,res) =>{
+    try {
+      const edited = await newsService.edit(req);
+      res.status(edited.statusCode).json(edited.result);
+    } catch (error) {
+      console.log(error);
+    }
+}
+
 
 module.exports = {
   getById,
   getAll,
   uploadNews,
-  updateById
+  updateById,
+  edit
 };

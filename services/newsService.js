@@ -116,8 +116,50 @@ const updateNews = async (date) =>{
 }
 
 
+const edit = async (date) =>{
+  let result,statusCode;
+
+  try {
+    const {id} = date.params;
+    //get news by id
+    const newness = await db.Entry.findByPk(id)
+    if(!newness) throw new errors.NotExistNews("NO EXISTE UNA ENTRADA CON ESE ID");
+
+    const {title,content,image,contentType,category} = date.body;
+    let updatedNewness = {
+      title,
+      content,
+      image,
+      contentType,
+      category
+    } 
+
+    await updateNewsValidation(updatedNewness);
+
+    await db.Entry.update(updatedNewness,{
+      where:{
+        id
+      }
+    });
+
+    result = await db.Entry.findByPk(id)
+    statusCode=200;
+
+  } catch (error) {
+    console.log(error)
+    result = { message: error.message };
+    statusCode = error.statusCode || 500;
+  }
+
+  return {
+    result,
+    statusCode
+  }
+}
 
 
 
 
-module.exports = {create, findAll, findById, updateNews}
+
+
+module.exports = {create, findAll, findById, updateNews, edit}
