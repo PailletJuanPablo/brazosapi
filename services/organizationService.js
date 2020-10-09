@@ -1,4 +1,6 @@
-const db = require('../models/')
+const db = require('../models/');
+const errors = require('../errors/errors');
+const updateOrganizationValidation = require('../joivalidation/updateOrganizationValidation');
 
 const getOrganization = async () => {
   let organizations
@@ -41,4 +43,38 @@ function parsePublicOrganization(organization) {
   }
 }
 
-module.exports = {getOrganization, get}
+const updateOrg = async (date) =>{
+  let result
+  let statusCode
+
+  try {
+    await updateOrganizationValidation(date.body);
+    const {id} = date.params;
+    const getOrg = await db.Organization.findOne({
+      where: {id: id}
+    });
+
+    if(!getOrg){
+      throw new errors.NotExistOrganization("NO EXISTE UNA ORGANIZACIÓN CON ESE ID");
+    }
+    result = await db.Organization.update(date.body, {
+    where: { id: id}
+    });
+    
+    statusCode = 200;
+  } catch (error) {
+    result = { msg : error.message}
+    statusCode = error.statusCode || 500;
+  }
+  return{
+    result,
+    statusCode
+  }
+
+}
+
+module.exports = {
+  getOrganization,
+  updateOrg,
+  get
+}
