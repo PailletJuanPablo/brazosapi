@@ -59,10 +59,27 @@ const updateById = async (req, res) => {
   res.status(update.statusCode).json(update.result);
 }
 
+const deleteById = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const deletedEntry = await newsService.deleteNews(id);
+
+    if(!deletedEntry) {
+      res.status(400).json({message: 'Entry was not found.'})
+    } else {
+      res.status(200).json({message: 'Entry has been deleted.', entry: deletedEntry})
+    }
+  } catch (error) {
+    res.status(500).json({message:'Server error.'})
+    throw error;
+  }
+}
+
 
 module.exports = {
   getById,
   getAll,
   uploadNews,
-  updateById
+  updateById,
+  deleteById
 };
