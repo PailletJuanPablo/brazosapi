@@ -5,11 +5,7 @@ const getOrganization = async () => {
   let statusCode
   try {
     
-    const result = await db.Organization.findOne({
-      where: {
-        id: 1
-      }
-    })
+    const result = await get()
     organizations = parsePublicOrganization(result)
     statusCode = 200
   } catch (error) {
@@ -36,7 +32,12 @@ function parsePublicOrganization(organization) {
     name: organization.name,
     image: organization.image,
     phone: organization.phone,
-    address: organization.address
+    address: organization.address,
+    welcomeText: organization.welcomeText,
+    description: organization.description,
+    facebookUrl: organization.facebookUrl,
+    instagramUrl: organization.instagramUrl,
+    linkedinUrl: organization.linkedinUrl
   }
 }
 
