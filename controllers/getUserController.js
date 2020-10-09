@@ -1,20 +1,30 @@
 const db = require('../models');
 const { getUserId } = require('../helpers/getUserId');
-
+const jwt = require('../util/jwt');
+const errors = require('../errors/errors');
 const getUser = async (req, res) => {
 	try {
-		console.log(req.headers.authorization)
-		if (!req.headers.authorization) {
-			res.status(400).send('Please provide Token');
-		}
-		const userId = getUserId(req);
-		const user = await db.User.findByPk(userId);
+		console.log(req.user)
+		
+		const user = await db.User.findOne({
+			where: {
+				id: req.user.userId
+			}
+		});
+		console.log(user.dataValues)
 		if (user === null) {
-			res.status(404).send('User not found');
+			throw new errors.NotFound('No se encuentra el usuario')
 		}
-		res.send({ user });
+		// hardcodeo el rol
+		res.json({
+			firstName: user.dataValues.firstName,
+			lastName: user.dataValues.lastName,
+			email: user.dataValues.email,
+			rol: 'admin'
+		});
 	} catch (error) {
 		console.log(error);
+		res.stats(500).json({message: 'Internal server error'})
 	}
 };
 
