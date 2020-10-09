@@ -44,7 +44,7 @@ const getAll = async (req, res) => {
   try {
     const news = await newsService.findAll();
     if (!news.length) {
-      return res.status(200).json({ message: 'No news found.' });
+      return res.status(200).json({ message: 'No news found.', news: [] });
     }
     return res.json({ message: 'OK', news });
   } catch (error) {
