@@ -82,7 +82,38 @@ class NotExistNews extends Error {
   }
 }
 
+class NotExistUser extends Error {
+  constructor(message) {
+    super()
+    Error.captureStackTrace(this, this.constructor)
+    this.statusCode = 404
+    this.message = message || 'NO EXISTE UN USUARIO CON ESE ID'
+  }
+}
 
-module.exports = { BadRequest, AlreadyExists, NotFound, InternalServerError, RequireLogin, RequirePermission, InvalidCredentials, IncompleteData, ExistingEmail, NotExistNews }
+class ExpectationFailed extends Error {
+  constructor(message) {
+    super()
+    Error.captureStackTrace(this, this.constructor)
+    this.statusCode = 417
+    this.message = message || 'No cumple con los requisitos'
+  }
+}
+
+
+module.exports = {
+  BadRequest,
+  AlreadyExists,
+  NotFound,
+  InternalServerError,
+  RequireLogin,
+  RequirePermission,
+  InvalidCredentials,
+  IncompleteData,
+  ExistingEmail,
+  NotExistNews,
+  NotExistUser,
+  ExpectationFailed
+}
 
 
