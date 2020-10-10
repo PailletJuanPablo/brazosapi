@@ -76,7 +76,7 @@ const findAll = async () => {
         contentType: 'news'
       },
       order: [['createdAt', 'DESC']],
-      attributes: ['id', 'title', 'createdAt']
+      attributes: ['id', 'title', 'createdAt', 'content', 'image']
     });
   } catch (error) {
     console.log(error);
