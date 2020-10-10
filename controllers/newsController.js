@@ -75,11 +75,22 @@ const deleteById = async (req, res) => {
   }
 }
 
+const editById = async (req,res) =>{
+  try {
+    const oneNews = await newsService.edit(req);
+    return res.status(200).json(oneNews.result);
+  } catch (error) {
+    console.log(error)
+    return res.status(500).send({ message: 'Server error' });
+  }
+}
+
 
 module.exports = {
   getById,
   getAll,
   uploadNews,
   updateById,
-  deleteById
+  deleteById,
+  editById
 };
