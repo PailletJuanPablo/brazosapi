@@ -1,5 +1,5 @@
 const errors = require("../errors/errors");
-const { uploadFile } = require("./awsService");
+const { uploadFile, deleteFile } = require("./awsService");
 const newsJoiValidation = require("../joivalidation/entryNews");
 const { validateImage } = require("../util/validateImage");
 const updateNewsValidation = require("../joivalidation/updateNews");
@@ -138,10 +138,12 @@ const edit = async (id,data,userId, fileprops = null) => {
   try {
     const news = await db.Entry.findByPk(id);
     if(!news) throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
+    const base = 'https://alkemy-ong.s3.amazonaws.com/';
+    const {image} = news;
+    const url = image.slice(base.length)
+    
     await newsJoiValidation(data);
 
-    
-    
     if(fileprops === null){
       console.log('No hay archivo');
       await db.Entry.update(data,{
@@ -151,7 +153,8 @@ const edit = async (id,data,userId, fileprops = null) => {
       });
 
     }else{
-
+      await deleteFile(url)
+      console.log('imagen eliminada de aws');
       validateImage(fileprops);
       const fileUploaded = await uploadFile(
         userId,

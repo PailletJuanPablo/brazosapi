@@ -22,4 +22,19 @@ const uploadFile = async (userId, fileName, fileStream) => {
   } 
 }
 
-module.exports = {uploadFile}
+const deleteFile = async(url) =>{
+  const params = {
+    Bucket:BUCKET_NAME,
+    Key:url
+  }
+
+  try {
+    const response = await s3.deleteObject(params).promise();
+    console.log(response);
+    return response;
+  } catch (error) {
+    throw {message: error.message}
+  }
+}
+
+module.exports = {uploadFile,deleteFile}
