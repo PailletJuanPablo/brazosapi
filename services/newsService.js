@@ -133,36 +133,43 @@ const deleteNews = async (id) => {
   }
 };
 
-const edit = async (data) => {
+const edit = async (id,data,userId, fileprops = null) => {
   let result, statusCode;
   try {
-    const { id } = data.params;
-    //get news by id
     const news = await db.Entry.findByPk(id);
-    if (!news)
-      throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
+    if(!news) throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
+    await newsJoiValidation(data);
 
-    const newImage ="https://alkemy-ong.s3.amazonaws.com/1/1602355552642-ardilla.jpg";
+    
+    
+    if(fileprops === null){
+      console.log('No hay archivo');
+      await db.Entry.update(data,{
+        where:{
+          id
+        }
+      });
 
-    if (newImage !== news.image) {
-      console.log('Hay otra imagen');
+    }else{
+
+      validateImage(fileprops);
+      const fileUploaded = await uploadFile(
+        userId,
+        fileprops.originalname,
+        fileprops.buffer
+      );
+      data.image = fileUploaded.Location;
+      await db.Entry.update(data,{
+        where:{
+          id
+        }
+      });
     }
-    const { title, content, category } = data.body;
-    const validateNews = {
-      title,
-      content,
-      category,
-    };
-    await newsJoiValidation(validateNews);
-    await db.Entry.update(validateNews, {
-      where: {
-        id: id,
-      },
-    });
-    const updatedNews = await db.Entry.findByPk(id);
-    result = updatedNews;
-    statusCode = 200;
 
+    const updatedNews = await db.Entry.findByPk(id);
+    result=updatedNews;
+    statusCode=200;
+    
   } catch (error) {
     console.log(error);
     result = { msg: error.message };
