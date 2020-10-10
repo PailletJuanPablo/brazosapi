@@ -44,7 +44,7 @@ const getAll = async (req, res) => {
   try {
     const news = await newsService.findAll();
     if (!news.length) {
-      return res.status(200).json({ message: 'No news found.' });
+      return res.status(200).json({ message: 'No news found.', news: [] });
     }
     return res.json({ message: 'OK', news });
   } catch (error) {
@@ -59,13 +59,20 @@ const updateById = async (req, res) => {
   res.status(update.statusCode).json(update.result);
 }
 
-const edit = async (req,res) =>{
-    try {
-      const edited = await newsService.edit(req);
-      res.status(edited.statusCode).json(edited.result);
-    } catch (error) {
-      console.log(error);
+const deleteById = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const deletedEntry = await newsService.deleteNews(id);
+
+    if(!deletedEntry) {
+      res.status(400).json({message: 'Entry was not found.'})
+    } else {
+      res.status(200).json({message: 'Entry has been deleted.', entry: deletedEntry})
     }
+  } catch (error) {
+    res.status(500).json({message:'Server error.'})
+    throw error;
+  }
 }
 
 
@@ -74,5 +81,5 @@ module.exports = {
   getAll,
   uploadNews,
   updateById,
-  edit
+  deleteById
 };

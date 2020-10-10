@@ -1,9 +1,30 @@
 const email = require('../util/email')
 const ejs = require('ejs')
 const db = require('../models/')
+const OrganizationService = require('./organizationService')
 // Este metodo es para usarse de manera asincrona
 const OngID = 1
 const ONG_NAME_HARDCODED = 'Brazos Abiertos'
+
+const contactMail = ''
+
+const sendContact = async (contact) => {
+  try {
+    const body = await ejs.renderFile('views/email/contact.ejs', {
+      fullName: contact.fullName,
+      email: contact.email,
+      message: contact.message
+    })
+    const organization = await OrganizationService.get()
+    let ongName = (organization) ? organization.name : ONG_NAME_HARDCODED
+    const renderedEmail = await generateEmail(body)
+      await email.send(contactMail, `${ongName} - ${contact.fullName} se quiere contactar`, null, renderedEmail)
+  } catch(error) {
+    console.log(error.message)
+  }
+  
+}
+
 const sendWelcome = async (user, ong) => {
   try {
     let ongName 
@@ -80,4 +101,4 @@ const sendHelloWorld = async () => {
   }
 }
 
-module.exports = {sendHelloWorld, sendTemplate, sendWelcome}
+module.exports = {sendHelloWorld, sendTemplate, sendWelcome, sendContact}

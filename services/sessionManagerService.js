@@ -3,6 +3,7 @@ const jwt = require('../util/jwt')
 const bcrypt = require('bcrypt')
 const userLoginCredentialValidation = require('../joivalidation/login')
 const errors = require('../errors/errors')
+
 const SessionLoginService = async (credentials) => {
   let result, statusCode
   try {
@@ -28,6 +29,7 @@ const SessionLoginService = async (credentials) => {
     } 
     statusCode = 201
   } catch (error) {
+    console.log(error.message);
     result = {message: error.message}
     statusCode = error.statusCode || 500
   }

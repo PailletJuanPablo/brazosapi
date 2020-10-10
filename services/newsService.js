@@ -9,27 +9,27 @@ const db = require('../models');
 
 const findById = async (date) => {
   let result, statusCode
- 
-  try {
-      //Revisar que exista
-      const {id} = date;
-      const getOneNews = await db.Entry.findOne({
-          where: {id: id}
-      });
 
-      if(!getOneNews){
-        throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
-      }
-      
-      result = getOneNews;
-      statusCode = 200;
+  try {
+    //Revisar que exista
+    const { id } = date;
+    const getOneNews = await db.Entry.findOne({
+      where: { id: id }
+    });
+
+    if (!getOneNews) {
+      throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
+    }
+
+    result = getOneNews;
+    statusCode = 200;
   } catch (error) {
-      result = { msg : error.message}
-      statusCode = error.statusCode;
+    result = { msg: error.message }
+    statusCode = error.statusCode;
   }
-  return{
-      result,
-      statusCode
+  return {
+    result,
+    statusCode
   }
 }
 
@@ -85,36 +85,57 @@ const findAll = async () => {
 
 
 
-const updateNews = async (date) =>{
+const updateNews = async (date) => {
   let result, statusCode
 
   try {
-    await updateNewsValidation(date.body);
-
-    const {id} = date.params;
+    let validation = await updateNewsValidation(date.body);
+    console.log(validation)
+    const { id } = date.params;
     const getOneNews = await db.Entry.findOne({
-      where: {id: id}
+      where: { id: id }
     });
     console.log(25);
 
-    if(!getOneNews){
+    if (!getOneNews) {
       throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
     }
 
     result = await db.Entry.update(date.body, {
-    where: { id: id}
+      where: { id: id }
     });
     statusCode = 200;
   } catch (error) {
-    result = { msg : error.message}
+    result = { msg: error.message }
     statusCode = error.statusCode || 500;
   }
-  return{
+  return {
     result,
     statusCode
   }
 }
 
+const deleteNews = async (id) => {
+  try {
+    let deletedEntry;
+    const entry = await db.Entry.findByPk(id);
+
+    if(!entry) {
+      deletedEntry = null;
+    } else {
+      await db.Entry.destroy({
+        where: {
+          id
+        }
+      });
+      deletedEntry = entry;
+    }
+    
+    return deletedEntry;
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const edit = async (date) =>{
   let result,statusCode;
@@ -160,6 +181,4 @@ const edit = async (date) =>{
 
 
 
-
-
-module.exports = {create, findAll, findById, updateNews, edit}
+module.exports = {create, findAll, findById, updateNews, deleteNews}
