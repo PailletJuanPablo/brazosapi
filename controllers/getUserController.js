@@ -15,12 +15,12 @@ const getUser = async (req, res) => {
 		if (user === null) {
 			throw new errors.NotFound('No se encuentra el usuario')
 		}
-		// hardcodeo el rol
 		res.json({
 			firstName: user.dataValues.firstName,
 			lastName: user.dataValues.lastName,
 			email: user.dataValues.email,
-			rol: 'admin'
+			//harcodeado 1 = user admin, arreglar con tabla roles
+			roleId: 1
 		});
 	} catch (error) {
 		console.log(error);
