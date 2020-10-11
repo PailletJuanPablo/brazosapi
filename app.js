@@ -11,6 +11,7 @@ const usersRouter = require('./routes/users');
 const organizationRouter = require('./routes/organizations');
 const newsRouter = require('./routes/news');
 const contactsRouter = require('./routes/contacts');
+const homeSlides = require('./routes/slides');
 
 const entriesRouter = require('./routes/news')
 const emailRouter = require('./routes/email')
@@ -32,7 +33,8 @@ app.use('/users', usersRouter);
 app.use('/organization', organizationRouter);
 app.use('/news', newsRouter);
 app.use('/entries/', entriesRouter)
-app.use('/contacts', contactsRouter )
+app.use('/contacts', contactsRouter)
+app.use('/slides/', homeSlides)
 app.use('/emails/', emailRouter)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

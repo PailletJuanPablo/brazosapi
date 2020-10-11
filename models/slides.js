@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Slides.init({
+    bienvenida: DataTypes.STRING,
     image: DataTypes.STRING,
     text: DataTypes.STRING,
     order: DataTypes.INTEGER,
