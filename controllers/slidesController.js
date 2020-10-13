@@ -1,4 +1,4 @@
-const {slideAll, createSlide} = require('../services/slidesService')
+const {slideAll, createSlide, updateSlide} = require('../services/slidesService')
 
 const getAll = async (req, res) => {
   try {
@@ -18,5 +18,14 @@ const storeSlide = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  try {
+    const resultado = await updateSlide(req, res);
+    // res.send('ok')
+  } catch (error) {
+    console.log(error)
+  }
+};
 
-module.exports = {getAll, storeSlide}
+
+module.exports = {getAll, storeSlide, update}
