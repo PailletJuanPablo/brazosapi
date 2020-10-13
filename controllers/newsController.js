@@ -75,11 +75,32 @@ const deleteById = async (req, res) => {
   }
 }
 
+const editById = async (req,res) =>{
+
+    upload.single('media')(req, res, async (err) => {
+      const {id} = req.params;
+      const {title,content,category} = req.body;
+      const news={title,content,category};
+      
+      userId=1
+      if(!req.file){
+        const editedNews = await newsService.edit(id,news,userId);
+        res.status(editedNews.statusCode).json(editedNews.result);
+        return;
+      }
+
+      const editedNews = await newsService.edit(id,news,userId,req.file);
+      res.status(editedNews.statusCode).json(editedNews.result);
+      
+    }); 
+}
+
 
 module.exports = {
   getById,
   getAll,
   uploadNews,
   updateById,
-  deleteById
+  deleteById,
+  editById
 };
