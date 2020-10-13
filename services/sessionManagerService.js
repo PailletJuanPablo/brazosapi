@@ -21,8 +21,8 @@ const SessionLoginService = async (credentials) => {
       throw new errors.InvalidCredentials('Credenciales invalidas')
     }
     const payload = {
-      user: user.id,
-      rolId: user.roleId
+      userId: user.id,
+      roleId: user.roleId
     }
     result = await {
       jwt: jwt.generateJWT(payload)
