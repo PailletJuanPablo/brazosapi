@@ -27,10 +27,10 @@ const createSlide = async (req, res) => {
       const result = await slideSchema.validateAsync(req.body);
       const slide = await db.Slides.update(result, {
         where: {
-          id: 1
+          id : req.params.id
         }
       }) 
-      res.json({message:'el slide fue actualizado', slide});
+      res.json({message:'el slide fue actualizado'});
           
           
     } catch (error) {
