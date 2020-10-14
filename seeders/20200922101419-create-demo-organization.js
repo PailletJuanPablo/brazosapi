@@ -14,12 +14,12 @@ module.exports = {
       La asistencia es de forma parcial o total en el tiempo que se encuentren en tratamiento médico. Se realiza un acuerdo con la familia (dependiendo el caso, complejidad de la enfermedad, situación económica, entre otros) y en el transcurso de ese tiempo acordado los acompañamos: psicológicamente, con visitas continuas brindando acompañamiento en el hospital y en sus hogares.
   
       La asistencia es en materia de alimentos, ropa y calzado, elementos de higiene personal y del hogar. Así como también hacemos regalos personalizados a cada nene/nena asistido/a y a sus hermanitos/as para fechas especiales: inicio de clases, día del niño, navidad.`,
-      
+
       phone: 123456,
       address: 'Dirección demo',
       welcomeText: 'Todos podemos ayudar a alguien',
-      facebookUrl: 'https://www.facebook.com',
-      instagramUrl: 'https://www.instagram.com',
+      facebookUrl: 'https://www.facebook.com/brazosabiertos/',
+      instagramUrl: 'https://www.instagram.com/somosbrazosabiertos/?hl=es',
       linkedinUrl: 'https://www.linkedin.com',
       createdAt: new Date,
       updatedAt: new Date
