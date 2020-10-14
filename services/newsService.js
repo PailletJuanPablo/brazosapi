@@ -81,36 +81,6 @@ const findAll = async () => {
   }
 };
 
-const updateNews = async (date) => {
-  let result, statusCode;
-
-  try {
-    let validation = await updateNewsValidation(date.body);
-    console.log(validation);
-    const { id } = date.params;
-    const getOneNews = await db.Entry.findOne({
-      where: { id: id },
-    });
-    console.log(25);
-
-    if (!getOneNews) {
-      throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
-    }
-
-    result = await db.Entry.update(date.body, {
-      where: { id: id },
-    });
-    statusCode = 200;
-  } catch (error) {
-    result = { msg: error.message };
-    statusCode = error.statusCode || 500;
-  }
-  return {
-    result,
-    statusCode,
-  };
-};
-
 const deleteNews = async (id) => {
   try {
     let deletedEntry;
@@ -185,4 +155,4 @@ const edit = async (id,data,userId, fileprops = null) => {
   };
 };
 
-module.exports = { create, findAll, findById, updateNews, deleteNews, edit };
+module.exports = { create, findAll, findById, deleteNews, edit };
