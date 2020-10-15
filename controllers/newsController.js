@@ -14,7 +14,7 @@ const upload = multer({
 const db = require('../models/index');
 
 
-const uploadNews = (req, res) => {
+const create = (req, res) => {
   upload.single('media')(req, res, async (err) => {
     //ToDo:
     const news = {
@@ -51,13 +51,6 @@ const getAll = async (req, res) => {
     return res.status(500).send({ message: 'Server error' });
   }
 };
-
-const updateById = async (req, res) => {
-  //res.json(req.body);
-  //res.json(req.params);
-  const update = await newsService.updateNews(req);
-  res.status(update.statusCode).json(update.result);
-}
 
 const deleteById = async (req, res) => {
   try {
@@ -99,8 +92,7 @@ const editById = async (req,res) =>{
 module.exports = {
   getById,
   getAll,
-  uploadNews,
-  updateById,
+  create,
   deleteById,
   editById
 };
