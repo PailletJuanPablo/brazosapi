@@ -40,7 +40,7 @@ const create = async (data, fileprops, userId) => {
     if(data.category == 'Novedades') {
       data.contentType = 'news'
     } else {
-      data.contentType = 'events'
+      data.contentType = 'event'
     }    
     data.image = fileUploaded.Location;
     const newEntry = await db.Entry.create(data);
