@@ -110,7 +110,14 @@ class NotExistOrganization extends Error {
   }
 }
 
-
+class NotExistTestimony extends Error {
+  constructor(message) {
+    super()
+    Error.captureStackTrace(this, this.constructor)
+    this.statusCode = 404
+    this.message = message || 'NO EXISTE UNA TESTIMONIO CON ESE ID'
+  }
+}
 
 module.exports = {
   BadRequest,
@@ -125,7 +132,8 @@ module.exports = {
   NotExistNews,
   NotExistUser,
   ExpectationFailed,
-  NotExistOrganization
+  NotExistOrganization,
+  NotExistTestimony
  }
 
 
