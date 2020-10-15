@@ -12,9 +12,8 @@ const organizationRouter = require('./routes/organizations');
 const newsRouter = require('./routes/news');
 const contactsRouter = require('./routes/contacts');
 const contributorsRouter = require('./routes/contributors');
-
-const entriesRouter = require('./routes/news')
-const emailRouter = require('./routes/email')
+const emailRouter = require('./routes/email');
+const entriesRouter = require('./routes/entries');
 const app = express();
 app.use(cors());
 

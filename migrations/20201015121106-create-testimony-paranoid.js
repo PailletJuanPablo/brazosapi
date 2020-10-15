@@ -20,10 +20,10 @@ module.exports = {
       },
       organizationId: {
         type: Sequelize.INTEGER,
-        references: {
+/*         references: {
           model: 'organizations',
           key: 'id'
-        }
+        } */
       },
       createdAt: {
         allowNull: false,
