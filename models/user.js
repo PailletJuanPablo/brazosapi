@@ -9,18 +9,22 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.Organization, { as: 'organization' })
     }
   };
-  User.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    roleId: DataTypes.INTEGER,
-    organizationId: DataTypes.INTEGER,
-    deletedAt: DataTypes.DATE
-  }, {
-    sequelize,
-    paranoid: true,
-    modelName: 'User',
-  });
+  User.init(
+    {
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
+      roleId: DataTypes.INTEGER,
+      organizationId: DataTypes.INTEGER,
+      deletedAt: DataTypes.DATE,
+      recovery_password_token: STRING
+    },
+    {
+      sequelize,
+      paranoid: true,
+      modelName: 'User'
+    }
+  );
   return User;
 };
