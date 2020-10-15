@@ -14,11 +14,9 @@ const findById = async (date) => {
     const getOneNews = await db.Entry.findOne({
       where: { id: id },
     });
-
     if (!getOneNews) {
       throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
     }
-
     result = getOneNews;
     statusCode = 200;
   } catch (error) {
@@ -81,36 +79,6 @@ const findAll = async () => {
   }
 };
 
-const updateNews = async (date) => {
-  let result, statusCode;
-
-  try {
-    let validation = await updateNewsValidation(date.body);
-    console.log(validation);
-    const { id } = date.params;
-    const getOneNews = await db.Entry.findOne({
-      where: { id: id },
-    });
-    console.log(25);
-
-    if (!getOneNews) {
-      throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
-    }
-
-    result = await db.Entry.update(date.body, {
-      where: { id: id },
-    });
-    statusCode = 200;
-  } catch (error) {
-    result = { msg: error.message };
-    statusCode = error.statusCode || 500;
-  }
-  return {
-    result,
-    statusCode,
-  };
-};
-
 const deleteNews = async (id) => {
   try {
     let deletedEntry;
@@ -140,10 +108,8 @@ const edit = async (id,data,userId, fileprops = null) => {
     if(!news) throw new errors.NotExistNews("NO EXISTE UNA NOTICIA CON ESE ID");
     const base = 'https://alkemy-ong.s3.amazonaws.com/';
     const {image} = news;
-    const url = image.slice(base.length)
-    
+    const url = image.slice(base.length)    
     await newsJoiValidation(data);
-
     if(fileprops === null){
       console.log('No hay archivo');
       await db.Entry.update(data,{
@@ -151,7 +117,6 @@ const edit = async (id,data,userId, fileprops = null) => {
           id
         }
       });
-
     }else{
       await deleteFile(url)
       console.log('imagen eliminada de aws');
@@ -168,21 +133,18 @@ const edit = async (id,data,userId, fileprops = null) => {
         }
       });
     }
-
     const updatedNews = await db.Entry.findByPk(id);
     result=updatedNews;
-    statusCode=200;
-    
+    statusCode=200;    
   } catch (error) {
     console.log(error);
     result = { msg: error.message };
     statusCode = error.statusCode;
   }
-
   return {
     result,
     statusCode,
   };
 };
 
-module.exports = { create, findAll, findById, updateNews, deleteNews, edit };
+module.exports = { create, findAll, findById, deleteNews, edit };

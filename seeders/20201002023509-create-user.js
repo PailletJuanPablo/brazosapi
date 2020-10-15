@@ -7,12 +7,11 @@ module.exports = {
       lastName: 'Doe',
       email: 'example@example.com',
       password: await bcrypt.hash(`123456789`,10),
+      roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
   },
-
-  down: async (queryInterface, Sequelize) => {
-    
+  down: async (queryInterface, Sequelize) => {    
   }
 };
