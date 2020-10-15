@@ -6,7 +6,7 @@ const findAll = async () => {
   try {
     return await db.Entry.findAll({
       where: {
-        contentType: "news",
+        contentType: "event",
       },
       order: [['createdAt', 'DESC']],
       attributes: ['id', 'title', 'createdAt', 'content', 'image']
