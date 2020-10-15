@@ -20,9 +20,8 @@ module.exports = {
       },
       organizationId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: 'Organization',
+          model: 'organizations',
           key: 'id'
         }
       },

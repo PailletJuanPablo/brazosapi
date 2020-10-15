@@ -1,15 +1,9 @@
 'use strict';
 const { Model } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
   class Testimony extends Model {
     static associate(models) {
-      posts.belongsTo(models.organization, {
-        foreignKey: {
-          name: 'organizationId',
-          allowNull: false
-        }
-      })
+      Testimony.belongsTo(models.Organization, { as: 'organization' })
     }
   };
   Testimony.init({
@@ -21,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     content: DataTypes.TEXT,
     image: DataTypes.STRING,
-    organizationId: DataTypes.INTEGER
+    organizationId: DataTypes.INTEGER,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
+    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     paranoid: true,
