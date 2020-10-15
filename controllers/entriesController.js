@@ -34,6 +34,22 @@ const getAll = async (req, res) => {
   }
 };
 
+const create = (req, res) => {
+  upload.single('media')(req, res, async (err) => {
+    //ToDo:
+    const news = {
+      title: req.body.title,
+      content: req.body.content,
+      category: req.body.category
+    };
+    //2. Descomentar y comentar cuando agreguen el middleware requireLogin a la ruta(antes que este asi le mete el req.user)
+    userId = 1;
+    // const userId = req.user.userId
+    const result = await entriesService.create(news, req.file, userId);
+    res.status(result.statusCode).json(result.result);
+  });
+};
+
 const deleteById = async (req, res) => {
   try {
     const {id} = req.params;
@@ -70,5 +86,6 @@ module.exports = {
   getById,
   getAll,
   deleteById,
-  editById
+  editById,
+  create
 };

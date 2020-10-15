@@ -20,7 +20,7 @@ const get = async () => {
   try {
     return await db.Organization.findOne({
       where: {
-        id: 3
+        id: 1
       }
     })
   } catch(error)

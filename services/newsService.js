@@ -1,7 +1,4 @@
 const errors = require("../errors/errors");
-// const { uploadFile, deleteFile } = require("./awsService");
-// const newsJoiValidation = require("../joivalidation/entryNews");
-// const { validateImage } = require("../util/validateImage");
 const db = require("../models");
 
 const findById = async (date) => {
@@ -28,42 +25,6 @@ const findById = async (date) => {
   };
 };
 
-// const create = async (data, fileprops, userId) => {
-//   let result, statusCode;
-//   try {
-//     await newsJoiValidation(data);
-//     validateImage(fileprops);
-//     const fileUploaded = await uploadFile(
-//       userId,
-//       fileprops.originalname,
-//       fileprops.buffer
-//     );
-//     data.contentType = "news";
-//     data.image = fileUploaded.Location;
-//     const newNews = await db.Entry.create(data);
-//     result = parseNew(newNews);
-//     statusCode = 201;
-//   } catch (error) {
-//     result = { message: error.message };
-//     statusCode = error.statusCode || 500;
-//   }
-//   return {
-//     result,
-//     statusCode,
-//   };
-// };
-
-// const parseNew = (content) => {
-//   return {
-//     title: content.title,
-//     content: content.content,
-//     image: content.image,
-//     category: content.category,
-//     contentType: content.contentType,
-//     createdAt: content.createdAt,
-//   };
-// };
-
 const findAll = async () => {
   try {
     return await db.Entry.findAll({
@@ -77,28 +38,6 @@ const findAll = async () => {
     console.log(error);
   }
 };
-
-// const deleteNews = async (id) => {
-//   try {
-//     let deletedEntry;
-//     const entry = await db.Entry.findByPk(id);
-
-//     if (!entry) {
-//       deletedEntry = null;
-//     } else {
-//       await db.Entry.destroy({
-//         where: {
-//           id,
-//         },
-//       });
-//       deletedEntry = entry;
-//     }
-
-//     return deletedEntry;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 // const edit = async (id,data,userId, fileprops = null) => {
 //   let result, statusCode;
@@ -146,4 +85,4 @@ const findAll = async () => {
 //   };
 // };
 
-module.exports = { findAll, findById,/*  create, deleteNews, edit */ };
+module.exports = { findAll, findById };

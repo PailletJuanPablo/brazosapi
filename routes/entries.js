@@ -5,6 +5,7 @@ const entriesController = require('../controllers/entriesController');
 router.get('/', entriesController.getAll);
 router.get('/:id', entriesController.getById);
 router.delete('/:id', entriesController.deleteById);
-router.put('/:id',entriesController.editById)
+router.put('/:id',entriesController.editById);
+router.post('/', entriesController.create);
 
 module.exports = router;
