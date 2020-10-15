@@ -14,7 +14,7 @@ const upload = multer({
 const db = require('../models/index');
 
 
-const uploadNews = (req, res) => {
+const create = (req, res) => {
   upload.single('media')(req, res, async (err) => {
     //ToDo:
     const news = {
@@ -87,7 +87,7 @@ const editById = async (req,res) =>{
 module.exports = {
   getById,
   getAll,
-  uploadNews,
+  create,
   deleteById,
   editById
 };
