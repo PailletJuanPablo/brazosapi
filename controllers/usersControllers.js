@@ -25,7 +25,10 @@ const update = async (req, res) => {
   console.log(req.user)
   try {
     const userUpdated = await userService.updates(req.user.userId, req.body);
+<<<<<<< HEAD
     console.log(userUpdated)
+=======
+>>>>>>> 2e3499ef8dffba730be4d0df92c2d0ef6599589b
     if (!userUpdated) {
       res.status(400).json({ error: 'No cumple con los requisitos' })
     } else {

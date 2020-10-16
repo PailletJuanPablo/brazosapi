@@ -22,7 +22,7 @@ const get = async () => {
       where: {
         id: 1 //mantener en 1
       }
-    })
+    });
   } catch(error)
   {
     throw {message: 'hay algun error'}

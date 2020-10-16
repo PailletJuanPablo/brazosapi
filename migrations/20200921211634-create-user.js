@@ -21,18 +21,18 @@ module.exports = {
         type: Sequelize.STRING
       },
       roleId: {
-          type: Sequelize.INTEGER,
-          /* references: {
-              model: 'roles',
-              key: 'id'
-          } */
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'roles',
+          key: 'id'
+        }
       },
       organizationId: {
         type: Sequelize.INTEGER,
-        /* references: {
-            model: 'organizations',
-            key: 'id'
-        } */
+        references: {
+          model: 'organizations',
+          key: 'id'
+        }
       },
       deletedAt: {
         type: Sequelize.DATE
