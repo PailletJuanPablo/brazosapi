@@ -19,6 +19,7 @@ const createToken = async (email) => {
       { recovery_password_token: token },
       { where: { email } }
     );
+    return token;
   } catch (error) {
     console.log(error);
     throw new Error('Token not created.')
