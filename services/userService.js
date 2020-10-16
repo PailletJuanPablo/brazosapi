@@ -23,13 +23,15 @@ const crateUser = async (datos) => {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                password: hash
+                password: hash,
+                roleId: 2
             });
             result = {
                 id: newUser.id,
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
                 email: newUser.email,
+                roleId: newUser.roleId
             }
             emailService.sendWelcome(result, 'Brazos Abiertos')
             statusCode = 200;
@@ -87,23 +89,36 @@ const findById = async (id) => {
 }
 
 const updates = async (id, body) => {
+    console.log(id)
+    console.log(body)
     const { firstName, lastName } = body;
     let userUpdated;
     try {
         await updateUserValidation(body);
+        const user = await db.User.findOne({
+            where: {
+                id: id
+            }
+        })
+        console.log(user)
+        // await user.save()
         userUpdated = await db.User.update({
             firstName: firstName,
             lastName: lastName,
         },
             { where: { id: id } }
         );
-        userUpdated = db.User.findOne({
+        console.log(userUpdated.dataValues)
+        userUpdated = await db.User.findOne({
             attributes: ['id', 'firstName', 'lastName', 'email'],
             where: { id: id },
         });
+        console.log(userUpdated)
         return userUpdated
     } catch (error) {
         console.log(error)
+        // return {message:}
+        return null
     }
 }
 

@@ -7,6 +7,7 @@ const errors = require('../errors/errors')
  function requireLogin(req, res, next) {
   const header = req.headers
   const token = header.authorization
+  console.log(token)
   try {
     if (_.isUndefined(token)) {
       throw new errors.RequireLogin('Necesitas estar Logeado')

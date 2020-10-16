@@ -14,8 +14,8 @@ router.post('/', usersControllers.create);
 /* POST session login user. */
 router.post('/session/login', sessionController.sessionController);
 /*DELETE user */
-router.delete('/:id',requireLogin,usersControllers.deleteAccount)
+router.delete('/',requireLogin,usersControllers.deleteAccount)
 /*PUT update user data*/
-router.put('/:id', requireLogin, usersControllers.update);
+router.put('/', requireLogin, usersControllers.update);
 
 module.exports = router;
