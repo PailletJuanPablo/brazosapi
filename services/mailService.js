@@ -101,4 +101,42 @@ const sendHelloWorld = async () => {
   }
 }
 
-module.exports = {sendHelloWorld, sendTemplate, sendWelcome, sendContact}
+const sendRecoveryEmail = async (user, url, ong) => {
+  try {
+    let ongName;
+    if (!ongName) {
+      const result = await db.Organization.findOne({
+        where: {
+          id: OngID
+        }
+      });
+      if (result) {
+        ongName = result.name;
+      } else {
+        ongName = ONG_NAME_HARDCODED;
+      }
+    } else {
+      ongName = ong;
+    }
+    const body = await ejs.renderFile('views/email/passwordRecovery.ejs', {
+      url
+    });
+    const renderedEmail = await generateEmail(body);
+    await email.send(
+      user.email,
+      `${ongName} - Recuperá tu contraseña`,
+      null,
+      renderedEmail
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+module.exports = {
+  sendHelloWorld,
+  sendTemplate,
+  sendWelcome,
+  sendContact,
+  sendRecoveryEmail
+};
