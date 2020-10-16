@@ -20,7 +20,7 @@ const get = async () => {
   try {
     return await db.Organization.findOne({
       where: {
-        id: 3
+        id: 1 //no cambiar, fijarse en la DB que solo haya una organización
       }
     })
   } catch(error)

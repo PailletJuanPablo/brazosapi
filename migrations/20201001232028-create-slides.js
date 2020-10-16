@@ -21,10 +21,10 @@ module.exports = {
       },
       organizationId: {
         type: Sequelize.INTEGER,
-        references: {
+        /* references: {
           model: 'organizations',
           key: 'id'
-        }
+        } */
       },
       deletedAt: {
         type: Sequelize.DATE

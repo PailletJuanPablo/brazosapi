@@ -22,17 +22,17 @@ module.exports = {
       },
       roleId: {
           type: Sequelize.INTEGER,
-          references: {
+          /* references: {
               model: 'roles',
               key: 'id'
-          }
+          } */
       },
       organizationId: {
         type: Sequelize.INTEGER,
-        references: {
+       /*  references: {
             model: 'organizations',
             key: 'id'
-        }
+        } */
       },
       deletedAt: {
         type: Sequelize.DATE
