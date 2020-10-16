@@ -7,9 +7,9 @@ const db = require("../models");
 const findAll = async () => {
   try {
     return await db.Testimony.findAll({
-      // where: {
-      //   organizationId: "1" ,
-      // },
+      where: {
+        organizationId: "1" ,
+      },
       order: [['createdAt', 'DESC']],
       attributes: ['id', 'name', 'createdAt', 'content', 'image']
     });
@@ -100,7 +100,6 @@ const create = async (data, fileprops, organizationId) => {
       result=updatedTestimony;
       statusCode=200;    
     } catch (error) {
-     // console.log(error);
       result = { msg: error.message };
       statusCode = error.statusCode;
     }
