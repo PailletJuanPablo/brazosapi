@@ -124,6 +124,11 @@ const edit = async (id,data,userId, fileprops = null) => {
         fileprops.buffer
       );
       data.image = fileUploaded.Location;
+      if(data.category == 'Novedades') {
+        data.contentType = 'news'
+      } else {
+        data.contentType = 'event'
+      }    
       await db.Entry.update(data,{
         where:{
           id
