@@ -14,6 +14,7 @@ const contactsRouter = require('./routes/contacts');
 const contributorsRouter = require('./routes/contributors');
 const eventsRouter = require('./routes/events');
 const testimonialsRouter = require('./routes/testimonials');
+const authRouter = require('./routes/auth');
 
 const entriesRouter = require('./routes/news')
 const emailRouter = require('./routes/email')
@@ -40,6 +41,7 @@ app.use('/emails/', emailRouter)
 app.use('/contributors', contributorsRouter);
 app.use('/events',eventsRouter);
 app.use('/testimonials', testimonialsRouter);
+app.use('/auth', authRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
