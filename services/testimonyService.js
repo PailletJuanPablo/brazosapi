@@ -4,6 +4,20 @@ const testimonyJoiValidation = require("../joivalidation/updateTestimony");
 const { validateImage } = require("../util/validateImage");
 const db = require("../models");
 
+const findAll = async () => {
+  try {
+    return await db.Testimony.findAll({
+      // where: {
+      //   organizationId: "1" ,
+      // },
+      order: [['createdAt', 'DESC']],
+      attributes: ['id', 'name', 'createdAt', 'content', 'image']
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 
 const create = async (data, fileprops, organizationId) => {
@@ -100,5 +114,6 @@ const create = async (data, fileprops, organizationId) => {
 
   module.exports = {
        create,
-       edit
+       edit,
+       findAll
      };
