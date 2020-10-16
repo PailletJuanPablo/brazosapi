@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       roleId: DataTypes.INTEGER,
       organizationId: DataTypes.INTEGER,
       deletedAt: DataTypes.DATE,
-      recovery_password_token: STRING
+      recovery_password_token: DataTypes.STRING
     },
     {
       sequelize,
