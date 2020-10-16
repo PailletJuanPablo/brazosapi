@@ -1,5 +1,6 @@
 const passwordRecoveryService = require('../services/passwordRecoveryService');
 const emailService = require('../services/mailService');
+const {development} = require('../config/config');
 
 const recover = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ const recover = async (req, res) => {
       const token = await passwordRecoveryService.createToken(email);
       await emailService.sendRecoveryEmail(
         user,
-        `${req.protocol}://${req.get('host')}/recuperar_clave?token=${token}`
+        `${development.frontAddress}/recuperar_clave?token=${token}`
       );
       res.status(200).json({ message: 'OK' });
     }
