@@ -5,8 +5,6 @@ const { getUser } = require('../controllers/getUserController');
 const usersControllers = require('../controllers/usersControllers');
 const requireLogin = require('../middlewares/requirelogin');
 
-
-
 /* GET authenticated user data */
 router.get('/user', requireLogin,getUser);
 /* POST create user. */

@@ -89,8 +89,6 @@ const findById = async (id) => {
 }
 
 const updates = async (id, body) => {
-    console.log(id)
-    console.log(body)
     const { firstName, lastName } = body;
     let userUpdated;
     try {
@@ -100,15 +98,12 @@ const updates = async (id, body) => {
                 id: id
             }
         })
-        console.log(user)
-        // await user.save()
         userUpdated = await db.User.update({
             firstName: firstName,
             lastName: lastName,
         },
             { where: { id: id } }
         );
-        console.log(userUpdated.dataValues)
         userUpdated = await db.User.findOne({
             attributes: ['id', 'firstName', 'lastName', 'email'],
             where: { id: id },
@@ -117,7 +112,6 @@ const updates = async (id, body) => {
         return userUpdated
     } catch (error) {
         console.log(error)
-        // return {message:}
         return null
     }
 }
