@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.TEXT(15000)
+        type: Sequelize.TEXT
       },
       phone: {
         type: Sequelize.INTEGER
