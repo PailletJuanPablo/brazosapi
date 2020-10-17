@@ -42,9 +42,7 @@ const create = (req, res) => {
       content: req.body.content,
       category: req.body.category
     };
-    //2. Descomentar y comentar cuando agreguen el middleware requireLogin a la ruta(antes que este asi le mete el req.user)
-    userId = 1;
-    // const userId = req.user.userId
+    const userId = req.user.userId
     const result = await entriesService.create(entry, req.file, userId);
     res.status(result.statusCode).json(result.result);
   });
@@ -54,7 +52,6 @@ const deleteById = async (req, res) => {
   try {
     const { id } = req.params;
     const deletedEntry = await entriesService.remove(id);
-
     if (!deletedEntry) {
       res.status(400).json({ message: 'Entry was not found.' })
     } else {
@@ -71,9 +68,7 @@ const editById = async (req, res) => {
     const { id } = req.params;
     const { title, content, category } = req.body;
     const entry = { title, content, category };
-    //2. Descomentar y comentar cuando agreguen el middleware requireLogin a la ruta(antes que este asi le mete el req.user)
-    userId = 1;
-    // const userId = req.user.userId
+    const userId = req.user.userId
     if (!req.file) {
       const editedEntries = await entriesService.edit(id, entry, userId);
       res.status(editedEntries.statusCode).json(editedEntries.result);

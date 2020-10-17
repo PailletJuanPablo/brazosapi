@@ -52,10 +52,8 @@ const crateUser = async (datos) => {
 const softDelete = async (id) => {
     let result, statusCode
     try {
-
         //buscar usuario por id
         const user = await db.User.findByPk(id);
-
         if (user === null) throw new errors.NotFound('Usuario no encontrado');
         const { firstName, lastName, email } = user
         await db.User.destroy({
