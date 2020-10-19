@@ -15,7 +15,8 @@ const errors = require('../errors/errors')
     const payload = jwt(token.split(' ')[1])
     const user = {
       userId: payload.userId,
-      roleId: payload.roleId
+      roleId: payload.roleId,
+      organizationId: payload.organizationId
     }
     req.user = user
     next()
