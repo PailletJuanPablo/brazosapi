@@ -110,10 +110,29 @@ const create = async (data, fileprops, organizationId) => {
     };
   };
 
-
+  const remove = async (id) => {
+    try {
+      let deletedTestimony;
+      const testimony = await db.Testimony.findByPk(id);
+      if (!testimony) {
+        deletedEntry = null;
+      } else {
+        await db.Testimony.destroy({
+          where: {
+            id,
+          },
+        });
+        deletedTestimony = Testimony;
+      }
+      return deletedTestimony;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   module.exports = {
        create,
        edit,
-       findAll
+       findAll,
+       remove
      };
