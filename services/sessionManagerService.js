@@ -22,7 +22,8 @@ const SessionLoginService = async (credentials) => {
     }
     const payload = {
       userId: user.id,
-      roleId: user.roleId
+      roleId: user.roleId,
+      organizationId: user.organizationId
     }
     result = await {
       jwt: jwt.generateJWT(payload)

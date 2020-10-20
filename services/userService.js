@@ -24,14 +24,16 @@ const crateUser = async (datos) => {
                 lastName: lastName,
                 email: email,
                 password: hash,
-                roleId: 2
+                roleId: 2,
+                organizationId: 1
             });
             result = {
                 id: newUser.id,
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
                 email: newUser.email,
-                roleId: newUser.roleId
+                roleId: newUser.roleId,
+                organizationId: newUser.organizationId
             }
             emailService.sendWelcome(result, 'Brazos Abiertos')
             statusCode = 200;

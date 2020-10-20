@@ -8,6 +8,7 @@ module.exports = {
       email: 'example@example.com',
       password: await bcrypt.hash(`123456789`,10),
       roleId: 1,
+      organizationId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -17,6 +18,7 @@ module.exports = {
       email: 'comun@comun.com',
       password: await bcrypt.hash(`123456`,10),
       roleId: 2,
+      organizationId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
