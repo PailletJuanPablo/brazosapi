@@ -25,15 +25,12 @@ const getAll = async (req, res) => {
 
 const uploadTestimony = (req, res) => {
   upload.single("media")(req, res, async (err) => {
-    //ToDo:
     const testimony = {
       name: req.body.name,
       content: req.body.content,
     };
-    //console.log(req.file);
-    //2. Descomentar y comentar cuando agreguen el middleware requireLogin a la ruta(antes que este asi le mete el req.user)
-    organizationId = 1;
-    // const userId = req.user.userId
+    organizationId = req.user.organizationId;
+    console.log(req.user)
     const result = await testimonyService.create(
       testimony,
       req.file,
@@ -49,9 +46,7 @@ const editById = async (req, res) => {
       name: req.body.name,
       content: req.body.content,
     };
-
-    organizationId = 1;
-
+    organizationId = req.user.organizationId;
     if (!req.file) {
       const editedTestimony = await testimonyService.edit(
         req.params.id,

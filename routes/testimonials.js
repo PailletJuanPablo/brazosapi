@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const testimonyController = require('../controllers/testimonyController');
+const requireLogin = require('../middlewares/requirelogin');
 
 router.get('/', testimonyController.getAll)
 
-router.post('/', testimonyController.uploadTestimony);
+router.post('/', requireLogin, testimonyController.uploadTestimony);
 
-router.put('/:id',testimonyController.editById);
+router.put('/:id', requireLogin, testimonyController.editById);
 
 module.exports = router;

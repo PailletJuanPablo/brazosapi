@@ -29,8 +29,9 @@ const create = async (data, fileprops, organizationId) => {
       const fileUploaded = await uploadFile(
         organizationId,
         fileprops.originalname,
-        fileprops.buffer
+        fileprops.buffer        
       );
+      data.organizationId = organizationId;
       data.image = fileUploaded.Location;
       const newTestimony = await db.Testimony.create(data);
       result = parse(newTestimony);
