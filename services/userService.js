@@ -23,13 +23,15 @@ const crateUser = async (datos) => {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                password: hash
+                password: hash,
+                roleId: 2
             });
             result = {
                 id: newUser.id,
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
                 email: newUser.email,
+                roleId: newUser.roleId
             }
             emailService.sendWelcome(result, 'Brazos Abiertos')
             statusCode = 200;
@@ -50,10 +52,8 @@ const crateUser = async (datos) => {
 const softDelete = async (id) => {
     let result, statusCode
     try {
-
         //buscar usuario por id
         const user = await db.User.findByPk(id);
-
         if (user === null) throw new errors.NotFound('Usuario no encontrado');
         const { firstName, lastName, email } = user
         await db.User.destroy({
@@ -91,19 +91,26 @@ const updates = async (id, body) => {
     let userUpdated;
     try {
         await updateUserValidation(body);
+        const user = await db.User.findOne({
+            where: {
+                id: id
+            }
+        })
         userUpdated = await db.User.update({
             firstName: firstName,
             lastName: lastName,
         },
             { where: { id: id } }
         );
-        userUpdated = db.User.findOne({
+        userUpdated = await db.User.findOne({
             attributes: ['id', 'firstName', 'lastName', 'email'],
             where: { id: id },
         });
+        console.log(userUpdated)
         return userUpdated
     } catch (error) {
         console.log(error)
+        return null
     }
 }
 

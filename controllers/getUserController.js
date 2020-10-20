@@ -20,7 +20,7 @@ const getUser = async (req, res) => {
 			lastName: user.dataValues.lastName,
 			email: user.dataValues.email,
 			//harcodeado 1 = user admin, arreglar con tabla roles
-			roleId: 1
+			roleId: user.dataValues.roleId
 		});
 	} catch (error) {
 		console.log(error);

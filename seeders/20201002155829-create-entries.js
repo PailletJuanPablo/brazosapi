@@ -16,7 +16,7 @@ module.exports = {
       content: 'Contenido de novedad',
       image: 'https://miro.medium.com/max/15904/1*9L6543aM8rKDKrd0vi0n4g.jpeg',
       contentType: "news",
-      category: "Novedad",
+      category: "Novedades",
       createdAt: new Date,
       updatedAt: new Date
     },
@@ -25,7 +25,7 @@ module.exports = {
       content: 'Contenido de novedad',
       image: 'https://miro.medium.com/max/15904/1*9L6543aM8rKDKrd0vi0n4g.jpeg',
       contentType: "news",
-      category: "Novedad",
+      category: "Novedades",
       createdAt: new Date,
       updatedAt: new Date
     },
@@ -34,7 +34,7 @@ module.exports = {
       content: 'Contenido de evento',
       image: 'https://miro.medium.com/max/15904/1*9L6543aM8rKDKrd0vi0n4g.jpeg',
       contentType: "event",
-      category: "Evento",
+      category: "Eventos",
       createdAt: new Date,
       updatedAt: new Date
     },
@@ -43,7 +43,7 @@ module.exports = {
       content: 'Contenido de evento',
       image: 'https://miro.medium.com/max/15904/1*9L6543aM8rKDKrd0vi0n4g.jpeg',
       contentType: "event",
-      category: "Evento",
+      category: "Eventos",
       createdAt: new Date,
       updatedAt: new Date
     },
@@ -52,12 +52,13 @@ module.exports = {
       content: 'Contenido de evento',
       image: 'https://miro.medium.com/max/15904/1*9L6543aM8rKDKrd0vi0n4g.jpeg',
       contentType: "event",
-      category: "Evento",
+      category: "Eventos",
       createdAt: new Date,
       updatedAt: new Date
     }
   ], {});
   },
   down: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('Entries', null, {});
   }
 };

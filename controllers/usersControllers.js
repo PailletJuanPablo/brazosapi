@@ -23,7 +23,7 @@ const getOne = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const userUpdated = await userService.updates(req.params.id, req.body);
+    const userUpdated = await userService.updates(req.user.userId, req.body);
     if (!userUpdated) {
       res.status(400).json({ error: 'No cumple con los requisitos' })
     } else {
@@ -36,15 +36,8 @@ const update = async (req, res) => {
 
 const deleteAccount = async (req, res) => {
   try {
-
-    const token = req.headers.authorization.split(' ')[1];
-    if (!token) return res.send('No hay token');
-    const { user } = verifyJWT(token);
-    if (user != req.params.id) return res.send('Hubo un error');
-
-    const deleteResult = await userService.softDelete(req.params.id);
+    const deleteResult = await userService.softDelete(req.user.userId);
     res.status(deleteResult.statusCode).json(deleteResult.result);
-
   } catch (error) {
     console.log(error);
   }

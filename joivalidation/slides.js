@@ -15,7 +15,19 @@ module.exports = async (credentials) => {
 }
 
 const schema = Joi.object({
-  title: Joi.string().required(),
-  content: Joi.string().max(15000).required(),
-  category: Joi.string().alphanum().required()
+  bienvenida: Joi.string().min(4).required(),
+  text: Joi.string(),
+  order: Joi.string().alphanum().required()
+
 })
+
+// const slideSchema = Joi.object({
+//   bienvenida: Joi.string().min(4),
+//   text: Joi.string().min(4),
+//   //image: Joi.string().min(4),
+//   order: Joi.number(),
+// })
+
+// module.exports = {
+//   slideSchema,
+// }

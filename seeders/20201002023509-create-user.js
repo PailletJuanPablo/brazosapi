@@ -10,8 +10,18 @@ module.exports = {
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
+    },
+    {
+      firstName: 'Fabiola',
+      lastName: 'Rodriguez',
+      email: 'comun@comun.com',
+      password: await bcrypt.hash(`123456`,10),
+      roleId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
     }]);
   },
-  down: async (queryInterface, Sequelize) => {    
+  down: async (queryInterface, Sequelize) => { 
+    return queryInterface.bulkDelete('Users', null, {});   
   }
 };
