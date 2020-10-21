@@ -69,9 +69,29 @@ describe('Slides', () => {
         })
     })
   })
+
+  describe('/POST slides', () =>{
+    it('it should no POST a slide if there no is text is empty', done =>{
+      chai
+        .request(server)
+        .post('/slides')
+        .attach('media',fs.readFileSync(path.join(__dirname,'aguila.jpg')),'aguila.jpg')
+        .field('bienvenida', 'texto de prueba')
+        .field('text', '')
+        .field('order', 7)
+        .end((err,res) =>{
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message');
+          res.body.message.should.be.equal('Informacion incorrecta');
+          done();
+        })
+    })
+  })
   /**
    * Test the /PUT route
    */
+  
   describe('/PUT/:id Slides', () => {
     it('it should not update the slide info', (done) => {
         const slide = {
