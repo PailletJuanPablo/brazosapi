@@ -15,11 +15,11 @@ const getAll = async (req, res) => {
   try {
     const testimony = await testimonyService.findAll(req);
     if (!testimony.length) {
-      return res.status(200).json({ message: "No testimony found.", testimony: [] });
+      return res.status(404).json({ message: "No Testimonies Found", testimony: [] });
     }
-    return res.json({ message: "OK", testimony });
+    return res.status(200).json({ message: "OK", testimony });
   } catch (error) {
-    return res.status(500).send({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -30,7 +30,6 @@ const uploadTestimony = (req, res) => {
       content: req.body.content,
     };
     organizationId = req.user.organizationId;
-    console.log(req.user)
     const result = await testimonyService.create(
       testimony,
       req.file,
@@ -53,7 +52,6 @@ const editById = async (req, res) => {
         testimony,
         organizationId
       );
-      console.log(editedTestimony);
       res.status(editedTestimony.statusCode).json(editedTestimony.result);
       return;
     }
