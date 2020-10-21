@@ -10,11 +10,12 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 //Our parent block
+/*
 describe('Testimonials', () => {
 
-/*
-  * Test the /GET route
-  */
+
+  //  Test the /GET route
+  
   describe('/GET testimonials', () => {
 
       it('it should return all testimonials', (done) => {
@@ -45,4 +46,4 @@ describe('Testimonials', () => {
 
   });
 
-});
+}); */
