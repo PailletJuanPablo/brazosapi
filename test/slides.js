@@ -51,12 +51,6 @@ describe('Slides', () => {
 
   describe('/POST slides', () =>{
     it('it should POST a slide', done =>{
-      let slide ={
-        bienvenida:'Testing slide',
-        text:'text testing',
-        order:6
-      }
-
       chai
         .request(server)
         .post('/slides')
@@ -75,7 +69,9 @@ describe('Slides', () => {
         })
     })
   })
-
+  /**
+   * Test the /PUT route
+   */
   describe('/PUT/:id Slides', () => {
     it('it should not update the slide info', (done) => {
         const slide = {
