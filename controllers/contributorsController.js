@@ -19,4 +19,19 @@ const add = async (req, res) => {
   }
 };
 
-module.exports = { add };
+const getAll = async (req, res) => {
+  try {
+    const contributions = await contributorsService.findAll();
+    if (!contributions.length) {
+      return res.status(200).json({ message: "No contributions found.", contributions: [] });
+    }
+    return res.json({ message: "OK", contributions });
+  } catch (error) {
+    return res.status(500).send({ message: "Server error" });
+  }
+};
+
+module.exports = {
+  add,
+  getAll
+  };

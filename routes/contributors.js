@@ -1,8 +1,9 @@
 let express = require('express');
 let router = express.Router();
+const contributorsController = require('../controllers/contributorsController');
 
-const contributors = require('../controllers/contributorsController');
+router.get('/', contributorsController.getAll);
 
-router.post('/', contributors.add);
+router.post('/', contributorsController.add);
 
 module.exports = router;

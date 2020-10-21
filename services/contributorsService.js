@@ -20,4 +20,19 @@ const add = async (contributor) => {
   }
 };
 
-module.exports = { add };
+const findAll = async () => {
+  try {
+    return await db.Contributor.findAll({
+      order: [['createdAt', 'DESC']],
+      attributes: ['id', 'fullName', 'email', 'type', 'createdAt']
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+module.exports = {
+  add,
+  findAll
+};
