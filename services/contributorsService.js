@@ -24,7 +24,7 @@ const findAll = async () => {
   try {
     return await db.Contributor.findAll({
       order: [['createdAt', 'DESC']],
-      attributes: ['id', 'fullName', 'email', 'type']
+      attributes: ['id', 'fullName', 'email', 'type', 'createdAt']
     });
   } catch (error) {
     console.log(error);
