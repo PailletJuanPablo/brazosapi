@@ -1,25 +1,8 @@
 const contributorsService = require('../services/contributorsService');
 
-const add = async (req, res) => {
-  try {
-    const { fullName, email, type, message } = req.body;
-    if (!fullName || !email || !type || !message) {
-      res.status(400).json({ message: 'Missing data on the request' });
-    }else{
-      const contributorAdded = await contributorsService.add(req.body);
-      const contribution = {
-        id: contributorAdded.id,
-        fullName: contributorAdded.fullName,
-        email: contributorAdded.email,
-        type: contributorAdded.type,
-        message: contributorAdded.message,
-        createdAt: contributorAdded.createdAt
-      }
-      res.status(201).json({ message: 'Contribucion creada', contribution });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
+const create = async (req, res) => {
+    const result = await contributorsService.add(req.body);
+    res.status(result.statusCode).json(result.result);
 };
 
 const getAll = async (req, res) => {
@@ -35,6 +18,6 @@ const getAll = async (req, res) => {
 };
 
 module.exports = {
-  add,
+  create,
   getAll
   };
