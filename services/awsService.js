@@ -17,15 +17,15 @@ const uploadFile = async (userId, fileName, fileStream) => {
   try {
     const response = await s3.upload(params).promise()
     return response
-  } catch(error) {
-    throw {message: error.message}
-  } 
+  } catch (error) {
+    throw { message: error.message }
+  }
 }
 
-const deleteFile = async(url) =>{
+const deleteFile = async (url) => {
   const params = {
-    Bucket:BUCKET_NAME,
-    Key:url
+    Bucket: BUCKET_NAME,
+    Key: url
   }
 
   try {
@@ -33,8 +33,8 @@ const deleteFile = async(url) =>{
     console.log(response);
     return response;
   } catch (error) {
-    throw {message: error.message}
+    throw { message: error.message }
   }
 }
 
-module.exports = {uploadFile,deleteFile}
+module.exports = { uploadFile, deleteFile }
