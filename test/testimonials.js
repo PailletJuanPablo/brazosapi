@@ -24,7 +24,6 @@ describe('Testimonials', () => {
           res.body.message.should.be.a('string');
           res.body.message.should.be.equal('OK');
           res.body.testimony.should.be.a('array');
-          res.body.testimony.length.should.be.eql(3);
           done();
         });
     });
@@ -42,6 +41,103 @@ describe('Testimonials', () => {
         });
     });*/
   });/*END GET ROUTE*/
+  /*CREATE ROUTE*/
+  before(function (done) {
+    chai.request(server)
+      .post("/users/session/login")
+      .send(userCredentials)
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property("jwt");
+        res.body.jwt.should.be.a("string");
+        token = res.body.jwt;
+        done();
+      });
+  });
+  describe('/POST testimonials', () => {
+    it('it should return error Necesitas estar logueado', (done) => {
+      chai.request(server)
+        .post('/testimonials')
+        .end((err, res) => {
+          res.should.have.status(406);
+          res.body.message.should.be.a('string');
+          res.body.message.should.be.equal('Necesitas estar Logeado');
+          done();
+        });
+    });
+    it('it should return error Informacion incorrecta', (done) => {
+      chai.request(server)
+        .post('/testimonials')
+        .set({ Authorization: `Bearer ${token}` })
+        .field('name', '')
+        .field('content', '')
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.message.should.be.a('string');
+          res.body.message.should.be.equal('Informacion incorrecta');
+          done();
+        });
+    });
+    it('it should return error Informacion incorrecta', (done) => {
+      chai.request(server)
+        .post('/testimonials')
+        .set({ Authorization: `Bearer ${token}` })
+        .attach('media', fs.readFileSync(path.join(__dirname, 'tenedor.jpg')), 'tenedor.jpg')
+        .field('name', '')
+        .field('content', '')
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.message.should.be.a('string');
+          res.body.message.should.be.equal('Informacion incorrecta');
+          done();
+        });
+    });
+    it('it should return error Informacion incorrecta', (done) => {
+      chai.request(server)
+        .post('/testimonials')
+        .set({ Authorization: `Bearer ${token}` })
+        .attach('media', fs.readFileSync(path.join(__dirname, 'tenedor.jpg')), 'tenedor.jpg')
+        .field('name', 'prueba testimonio')
+        .field('content', '')
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.message.should.be.a('string');
+          res.body.message.should.be.equal('Informacion incorrecta');
+          done();
+        });
+    });
+    it('it should return error Informacion incorrecta', (done) => {
+      chai.request(server)
+        .post('/testimonials')
+        .set({ Authorization: `Bearer ${token}` })
+        .attach('media', fs.readFileSync(path.join(__dirname, 'tenedor.jpg')), 'tenedor.jpg')
+        .field('name', '')
+        .field('content', 'prueba testimonio')
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.message.should.be.a('string');
+          res.body.message.should.be.equal('Informacion incorrecta');
+          done();
+        });
+    });
+    it('it should return object success', (done) => {
+      chai.request(server)
+        .post('/testimonials')
+        .set({ Authorization: `Bearer ${token}` })
+        .attach('media', fs.readFileSync(path.join(__dirname, 'tenedor.jpg')), 'tenedor.jpg')
+        .field('name', 'texto de prueba')
+        .field('content', 'texto de prueba')
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('name');
+          res.body.should.have.property('content');
+          res.body.should.have.property('image');
+          res.body.should.have.property('createdAt');
+          done();
+        });
+    });
+  });/*END CREATE ROUTE*/
   /*PUT ROUTE*/
   before(function (done) {
     chai.request(server)
@@ -68,7 +164,7 @@ describe('Testimonials', () => {
     });
     it('it should return error Not Found', (done) => {
       chai.request(server)
-        .put('/testimonials/8')
+        .put('/testimonials/100')
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
           res.should.have.status(404);
