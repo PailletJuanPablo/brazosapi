@@ -101,35 +101,27 @@ const edit = async (id, data, organizationId, fileprops = null) => {
   };
 };
 
-<<<<<<< HEAD
-  const remove = async (id) => {
-    try {
-      const testimony = await db.Testimony.findByPk(id);
-      if (!testimony) {
-        deletedEntry = null;
-      } else {
-        await db.Testimony.destroy({
-          where: {
-            id,
-          },
-        });
-      }
-      return testimony;
-    } catch (error) {
-      console.log(error);
+const remove = async (id) => {
+  try {
+    const testimony = await db.Testimony.findByPk(id);
+    if (!testimony) {
+      deletedEntry = null;
+    } else {
+      await db.Testimony.destroy({
+        where: {
+          id,
+        },
+      });
     }
-  };
+    return testimony;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-  module.exports = {
-       create,
-       edit,
-       findAll,
-       remove
-     };
-=======
 module.exports = {
   create,
   edit,
-  findAll
+  findAll,
+  remove
 };
->>>>>>> origin/feature/OT3-265-test-endpoints-testimonials-errors
