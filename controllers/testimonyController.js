@@ -67,8 +67,24 @@ const editById = async (req, res) => {
   });
 };
 
+const deleteById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedTestimony = await testimonyService.remove(id);
+    if (!deletedTestimony) {
+      res.status(400).json({ message: 'Testimony was not found.' })
+    } else {
+      res.status(200).json({ message: 'Testimony has been deleted.', testimony: deletedTestimony })
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server error.' })
+    throw error;
+  }
+}
+
 module.exports = {
   uploadTestimony,
   editById,
-  getAll
+  getAll,
+  deleteById
 };
