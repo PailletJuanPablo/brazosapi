@@ -55,6 +55,9 @@ const updateSlide = async (id, data, fileprops, userId) => {
   let result, statusCode;
   
   try {
+    const slide = await db.Slides.findByPk(id);
+    if(!slide) throw new errors.NotExistNews("No existe un slide con ese ID");
+
     await slideSchema(data);
     // console.log(id)
     // console.log(data)
