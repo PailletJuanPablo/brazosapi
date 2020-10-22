@@ -7,7 +7,15 @@ const public = async(req, res) => {
 }
 
 const updateById = async (req, res) => {
-  const update = await organizationService.updateOrg(req);
+  const {id} =req.params;
+  const {name, image} = req.body;
+  
+  let ong ={
+    name,
+    image
+  }
+
+  const update = await organizationService.updateOrg(id,ong)
   res.status(update.statusCode).json(update.result);
 }
 
