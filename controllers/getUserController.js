@@ -11,7 +11,6 @@ const getUser = async (req, res) => {
 				id: req.user.userId
 			}
 		});
-		console.log(user.dataValues)
 		if (user === null) {
 			throw new errors.NotFound('No se encuentra el usuario')
 		}
@@ -24,7 +23,7 @@ const getUser = async (req, res) => {
 		});
 	} catch (error) {
 		console.log(error);
-		res.stats(500).json({message: 'Internal server error'})
+		res.status(error.statusCode || 500).json({message: 'Internal server error'})
 	}
 };
 
