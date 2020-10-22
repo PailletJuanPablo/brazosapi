@@ -35,7 +35,7 @@ const uploadTestimony = (req, res) => {
       req.file,
       organizationId
     );
-    res.status(result.statusCode).json(result.result);
+    res.status(result.statusCode || 500).json(result.result || { message: 'Server error' });
   });
 };
 
@@ -56,12 +56,12 @@ const editById = async (req, res) => {
       return;
     }
     const editedTestimony = await testimonyService.edit(
-      id,
+      req.params.id,
       testimony,
       organizationId,
       req.file
     );
-    res.status(editedTestimony.statusCode).json(editedTestimony.result);
+    res.status(editedTestimony.statusCode || 500).json(editedTestimony.result || { message: 'Server error' });
   });
 };
 
