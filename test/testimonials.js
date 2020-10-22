@@ -1,6 +1,6 @@
 //During the test the env variable is set to test
 
-
+/*
 //Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -14,7 +14,7 @@ describe('Testimonials', () => {
 
 /*
   * Test the /GET route
-  */
+ 
   describe('/GET testimonials', () => {
 
       it('it should return all testimonials', (done) => {
@@ -45,4 +45,4 @@ describe('Testimonials', () => {
 
   });
 
-});
+}); */
