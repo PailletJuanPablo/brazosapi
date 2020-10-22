@@ -43,25 +43,26 @@ function parsePublicOrganization(organization) {
   }
 }
 
-const updateOrg = async (date) =>{
+const updateOrg = async (id,data) =>{
   let result
   let statusCode
 
   try {
-    await updateOrganizationValidation(date.body);
-    const {id} = date.params;
-    const getOrg = await db.Organization.findOne({
-      where: {id: id}
-    });
+    //obtener ong a editar
+    const ong = await db.Organization.findByPk(id)
+    if(!ong) throw new errors.NotExistOrganization("NO EXISTE UNA ORGANIZACIÓN CON ESE ID");
 
-    if(!getOrg){
-      throw new errors.NotExistOrganization("NO EXISTE UNA ORGANIZACIÓN CON ESE ID");
-    }
-    result = await db.Organization.update(date.body, {
-    where: { id: id}
-    });
+    await updateOrganizationValidation.editValidation(data);
     
+    await db.Organization.update(data, {
+      where: { id: id}
+      });
+
+    const ongUpdated = await db.Organization.findByPk(id);
+    
+    result= ongUpdated;
     statusCode = 200;
+
   } catch (error) {
     result = { msg : error.message}
     statusCode = error.statusCode || 500;

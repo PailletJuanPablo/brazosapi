@@ -12,7 +12,6 @@ module.exports = async (datos) =>{
     }
 }
 
-
 const schema = Joi.object({
     name: Joi.string()
     .min(2)
@@ -34,3 +33,27 @@ const schema = Joi.object({
     instagramUrl: Joi.string(),
     linkedinUrl: Joi.string()
   });
+
+
+  const editValidation = async (datos) =>{
+    try {
+        const value = await editOng.validateAsync(datos);
+        console.log(value);
+    } catch (error) {
+       // console.log(error.message);
+        throw new errors.IncompleteData('Faltan datos');
+    }
+}
+
+const editOng = Joi.object({
+    name: Joi.string()
+    .min(2)
+    .max(40)
+    .required(),
+    image: Joi.string()
+  });
+
+
+  module.exports={
+      editValidation
+  }
