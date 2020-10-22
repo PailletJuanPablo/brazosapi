@@ -19,6 +19,10 @@ const public = async(req, res) => {
 }
 
 const updateById = async (req, res) => {
+
+  const isAdmin = req.user.roleId;
+  if(isAdmin !== 1) return res.status(403).json({message:'Permiso no valido'});
+
   upload.single('media')(req, res, async (err) => {
     const { id } = req.params;
     const {name} =req.body;
