@@ -15,8 +15,6 @@ module.exports = async (credentials) => {
 }
 
 const schema = Joi.object({
-    name: Joi.string()
-    .required(),
+    name: Joi.string(),
     content: Joi.string().max(15000)
-    .required()
 })
