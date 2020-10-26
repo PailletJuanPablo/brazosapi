@@ -13,8 +13,63 @@ const userCredentials = {
   password: '123456789'
 }
 
-describe('Testimonials', () => {
+describe('Entry', () => {
 
+  //GET
+  it('it should return all entries if not entries', (done) => {
+    chai.request(server).get('/contributors').end((err, res) => {
+      res.should.have.status(200);
+      res.body.message.should.be.a('string');
+      res.body.message.should.be.equal('OK');
+      res.body.entries.should.be.a('array');
+      res.body.entries.length.should.be.eql(0);
+      done();
+    });
+  });
+
+    it('it should return all entries', (done) => {
+      chai.request(server)
+        .get('/entries')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.message.should.be.a('string');
+          res.body.message.should.be.equal('OK');
+          res.body.entries.should.be.a('array');
+          done();
+        });
+    });
+    it('it should return entri for ID', (done) => {
+      const entrieID = 1;
+      chai.request(server)
+        .get('/entries/'+ entrieID)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('id');
+          res.body.should.have.property('title');
+          res.body.should.have.property('content');
+          res.body.should.have.property('image');
+          res.body.should.have.property('contentType');
+          res.body.should.have.property('category');
+          res.body.should.have.property('updatedAt');
+          done();
+        });
+    });
+
+    it('it should return entri for ID not exist', (done) => {
+      const entrieID = 25;
+      chai.request(server)
+        .get('/entries/'+ entrieID)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message');
+          res.body.message.should.be.equal('No existe una entrada con ese ID');
+          done();
+        });
+    });
+
+    /*
     //POST
     it('it should return contribution object', (done) => {
         chai.request(server).post('/contributors').send(contributionCreate)
@@ -31,7 +86,8 @@ describe('Testimonials', () => {
           res.body.contribution.should.have.property('createdAt');
           done();
         });
-      });
+      });*/
+
 
 
 });

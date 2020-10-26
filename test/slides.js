@@ -1,4 +1,4 @@
-
+/*
 const db= require('../models');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -26,9 +26,9 @@ describe('Slides', () => {
   })
 
 
-  /*
-  * Test the /GET route
-  */
+  
+ // Test the /GET route
+  
   describe('/GET slides', () => {
     it('it should return all slides', (done) => {
       chai
@@ -45,9 +45,9 @@ describe('Slides', () => {
     });
   });
 
-  /**
-   * Test the /POST route
-   */
+  
+  // Test the /POST route
+   
 
   describe('/POST slides', () =>{
     it('it should POST a slide', done =>{
@@ -88,9 +88,9 @@ describe('Slides', () => {
         })
     })
   })
-  /**
-   * Test the /PUT route
-   */
+  
+  // Test the /PUT route
+   
   
   describe('/PUT/:id Slides', () => {
     it('it should not update the slide info', (done) => {
@@ -113,3 +113,4 @@ describe('Slides', () => {
   });
 
 })
+*/
