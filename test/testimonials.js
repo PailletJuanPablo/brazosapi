@@ -1,4 +1,3 @@
-/*
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
@@ -15,7 +14,7 @@ const userCredentials = {
 }
 
 describe('Testimonials', () => {
-  //GET ROUTE
+  /*GET ROUTE*/
   describe('/GET testimonials', () => {
     it('it should return all testimonials', (done) => {
       chai.request(server)
@@ -28,7 +27,7 @@ describe('Testimonials', () => {
           done();
         });
     });
-    
+    /*
     it('it should return error No Testimonies Found', (done) => {
       chai.request(server)
         .get('/testimonials')
@@ -40,9 +39,9 @@ describe('Testimonials', () => {
           res.body.testimony.length.should.be.eql(0);
           done();
         });
-    });
-  });//END GET ROUTE
-  //CREATE ROUTE
+    });*/
+  });/*END GET ROUTE*/
+  /*CREATE ROUTE*/
   before(function (done) {
     chai.request(server)
       .post("/users/session/login")
@@ -138,8 +137,8 @@ describe('Testimonials', () => {
           done();
         });
     });
-  });//END CREATE ROUTE
-  //PUT ROUTE
+  });/*END CREATE ROUTE*/
+  /*PUT ROUTE*/
   before(function (done) {
     chai.request(server)
       .post("/users/session/login")
@@ -195,6 +194,5 @@ describe('Testimonials', () => {
           done();
         });
     });
-  });//END PUT ROUTE
+  });/*END PUT ROUTE*/
 });
-*/
