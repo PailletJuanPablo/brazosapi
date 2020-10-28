@@ -18,7 +18,7 @@ const findById = async (date) => {
     result = getOneEntry;
     statusCode = 200;
   } catch (error) {
-    result = { msg: error.message };
+    result = { message: error.message };
     statusCode = error.statusCode;
   }
   return {
