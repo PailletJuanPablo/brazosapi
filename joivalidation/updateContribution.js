@@ -1,6 +1,7 @@
-const _ = require('lodash')
+const _ = require('lodash');
 const Joi = require('joi');
-const errors = require('../errors/errors')
+const errors = require('../errors/errors');
+
 module.exports = async (credentials) => {
   if (_.isEmpty(credentials)) {
     throw new errors.BadRequest('No se han ingresado datos')
@@ -15,6 +16,14 @@ module.exports = async (credentials) => {
 }
 
 const schema = Joi.object({
-    name: Joi.string(),
-    content: Joi.string().max(15000)
+    fullName: Joi.string()
+    .required(),
+    email: Joi.string()
+    .min(6)
+    .max(40)
+    .required(),
+    type: Joi.string()
+    .required(),
+    message: Joi.string().max(15000)
+    .required()
 })

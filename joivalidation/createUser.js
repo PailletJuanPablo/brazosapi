@@ -25,6 +25,7 @@ const schema = Joi.object({
     email: Joi.string()
     .min(6)
     .max(40)
+    // .pattern(new RegExp('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'))
     .required(),
     password: Joi.string()
           .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),

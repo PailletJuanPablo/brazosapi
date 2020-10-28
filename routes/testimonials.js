@@ -9,4 +9,6 @@ router.post('/', requireLogin, testimonyController.uploadTestimony);
 
 router.put('/:id', requireLogin, testimonyController.editById);
 
+router.delete('/:id', requireLogin, testimonyController.deleteById)
+
 module.exports = router;
