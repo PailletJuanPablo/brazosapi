@@ -10,7 +10,9 @@ module.exports = {
         bienvenida: 'bienvenidos a la Fundación Brazos Abiertos',
         image: 'url de imagen',
         text: 'texto de ejemplo slider',
-        order: '1'
+        order: '1',
+        createdAt: new Date,
+        updatedAt: new Date
       }], {});
     
   },
