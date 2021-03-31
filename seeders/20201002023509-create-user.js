@@ -6,7 +6,7 @@ module.exports = {
       firstName: 'Administrador',
       lastName: 'Brazos Abiertos',
       email: 'brazosabiertos@alkemy.com',
-      password: await bcrypt.hash(`Br4z0s*`,10),
+      password: await bcrypt.hash(`Brazos9182`,10),
       roleId: 1,
       organizationId: 1,
       createdAt: new Date(),
