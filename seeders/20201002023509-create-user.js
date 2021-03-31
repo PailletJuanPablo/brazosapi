@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Users', [{
       firstName: 'Administrador',
       lastName: 'Brazos Abiertos',
-      email: 'brazosabiertos@alkemy.org',
+      email: 'brazosabiertos@alkemy.com',
       password: await bcrypt.hash(`Br4z0s*`,10),
       roleId: 1,
       organizationId: 1,
